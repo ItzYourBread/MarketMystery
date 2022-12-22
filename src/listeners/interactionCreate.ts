@@ -1,5 +1,5 @@
 import { Client, CommandInteraction } from 'eris';
-import { commands } from '../commands/command';
+import { commands } from '../commands/Command';
 import chalk from 'chalk';
 
 export function interactionCreate(client: Client) {
@@ -7,7 +7,7 @@ export function interactionCreate(client: Client) {
         if (interaction instanceof CommandInteraction) {
             for (let slashCommand of commands) {
                 if (slashCommand.name === interaction.data.name) {
-                    await slashCommand.run(client, interaction);
+                    await slashCommand.execute(client, interaction);
                     break;
                 }
             }

@@ -21,7 +21,9 @@ var client = new eris_1.Client(process.env.TOKEN, {
     },
     intents: ['guilds', 'guildMessages', 'guildMembers', 'guildEmojis'],
 });
+index_1.database.connect();
 index_1.listener.ready(client);
 index_1.listener.shardReady(client);
 index_1.listener.interactionCreate(client);
+index_1.command.global(client);
 client.connect();

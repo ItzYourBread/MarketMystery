@@ -5,7 +5,7 @@ import { Client } from 'eris';
 const commands = [];
 export { commands };
 
-export function loadCommands(client: Client) {
+export function global(client: Client) {
     client.on('ready', async () => {
         const commandFolders = readdirSync(`./dist/commands/commandList`);
         for (const folder of commandFolders) {
@@ -28,7 +28,7 @@ export function loadCommands(client: Client) {
                 await client.createCommand(slashCommandObject.default.data);
                 commands.push({
                     name: slashCommandObject.default.data.name,
-                    run: slashCommandObject.default.run,
+                    execute: slashCommandObject.default.execute,
                 });
             }
         }
