@@ -1,5 +1,5 @@
 import { Client } from 'eris';
-import { listener, command, database } from './structures/index';
+import { listener, command, database } from './utils/index';
 import figlet from 'figlet';
 import chalk from 'chalk';
 import 'dotenv/config';

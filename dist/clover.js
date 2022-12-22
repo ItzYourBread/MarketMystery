@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var eris_1 = require("eris");
-var index_1 = require("./structures/index");
+var index_1 = require("./utils/index");
 var figlet_1 = tslib_1.__importDefault(require("figlet"));
 var chalk_1 = tslib_1.__importDefault(require("chalk"));
 require("dotenv/config");

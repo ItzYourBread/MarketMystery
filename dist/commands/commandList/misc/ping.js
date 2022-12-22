@@ -5,6 +5,7 @@ exports.default = {
     data: {
         name: 'ping',
         description: '🏓 Ping Pong',
+        usage: '/ping',
     },
     execute: function (client, interaction) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {

@@ -6,8 +6,9 @@ declare const _default: {
         usage: string;
         options: {
             name: string;
-            type: 1;
+            type: 6;
             description: string;
+            required: boolean;
         }[];
     };
     execute(client: Client, interaction: CommandInteraction): Promise<void>;
