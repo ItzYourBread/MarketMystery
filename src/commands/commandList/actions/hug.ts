@@ -46,12 +46,28 @@ export default {
         try {
             await interaction.defer();
             const user = (interaction.data.options[0] as any).value;
+            const username = client.users.get(user).username;
+            const random = RandomArray(gifs);
 
-			const randomGif = RandomArray(gifs)
+            if (
+                (interaction.data.options[0] as any).value ===
+                interaction.member.id
+            ) {
+                await interaction.editOriginalMessage({
+                    content: "You can't hug yourself!! -.-",
+                });
+                setTimeout(() => {
+                    interaction.deleteOriginalMessage();
+                }, 5000);
+                return;
+            }
+
             let hug = {
-                title: `${interaction.member.username} & ${user}`,
+                title: `${interaction.member.username} & ${username}`,
                 color: Number(config.colour.primary),
-				image: randomGif,
+                image: {
+                    url: random,
+                },
                 footer: {
                     text: 'Awww...',
                 },
@@ -60,10 +76,13 @@ export default {
             await interaction.editOriginalMessage({ embeds: [hug] });
         } catch (err) {
             console.error(err);
-            return interaction.createMessage({
+            await interaction.editOriginalMessage({
                 content: 'Something went wrong :(',
-                flags: 64,
             });
+            setTimeout(() => {
+                interaction.deleteOriginalMessage();
+            }, 5000);
+            return;
         }
     },
 };
