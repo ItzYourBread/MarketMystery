@@ -10,13 +10,16 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "chalk": "4.0.0",
         "dotenv": "^16.0.3",
         "eris": "^0.17.1",
         "express": "^4.18.2",
+        "figlet": "^1.5.2",
         "fs": "^0.0.1-security",
         "mongoose": "^6.8.1",
         "path": "^0.12.7",
-        "stubby.ts": "^1.2.0"
+        "stubby.ts": "^1.2.0",
+        "tslib": "^2.4.1"
     },
     "devDependencies": {
         "@types/express": "^4.17.15",

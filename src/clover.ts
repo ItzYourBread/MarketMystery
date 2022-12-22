@@ -1,5 +1,13 @@
 import { Client } from 'eris';
-import "dotenv/config"
+import { listener } from './structures/index';
+import figlet from "figlet"
+import chalk from "chalk"
+import 'dotenv/config';
+
+console.clear();
+console.log(
+    chalk.greenBright(figlet.textSync('Clover.', { horizontalLayout: 'full' }))
+);
 
 const client = new Client(process.env.TOKEN, {
     restMode: true,
@@ -14,5 +22,9 @@ const client = new Client(process.env.TOKEN, {
     },
     intents: ['guilds', 'guildMessages', 'guildMembers', 'guildEmojis'],
 });
+
+listener.ready(client);
+listener.shardReady(client);
+listener.interactionCreate(client)
 
 client.connect();
