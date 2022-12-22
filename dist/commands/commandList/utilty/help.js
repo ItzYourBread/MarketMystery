@@ -27,7 +27,7 @@ exports.default = {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 6, , 7]);
+                        _a.trys.push([0, 6, , 8]);
                         return [4, interaction.defer()];
                     case 1:
                         _a.sent();
@@ -39,7 +39,7 @@ exports.default = {
                             fields: [
                                 {
                                     name: 'Actions',
-                                    value: '`hug`',
+                                    value: '`hug`, `cuddle`',
                                     inline: false,
                                 },
                                 {
@@ -71,15 +71,20 @@ exports.default = {
                     case 4:
                         _a.sent();
                         _a.label = 5;
-                    case 5: return [3, 7];
+                    case 5: return [3, 8];
                     case 6:
                         err_1 = _a.sent();
                         console.error(err_1);
-                        return [2, interaction.createMessage({
+                        return [4, interaction.editOriginalMessage({
                                 content: 'Something went wrong :(',
-                                flags: 64,
                             })];
-                    case 7: return [2];
+                    case 7:
+                        _a.sent();
+                        setTimeout(function () {
+                            interaction.deleteOriginalMessage();
+                        }, 5000);
+                        return [2];
+                    case 8: return [2];
                 }
             });
         });

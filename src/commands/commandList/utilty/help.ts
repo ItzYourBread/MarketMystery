@@ -30,7 +30,7 @@ export default {
                     fields: [
                         {
                             name: 'Actions',
-                            value: '`hug`',
+                            value: '`hug`, `cuddle`',
                             inline: false,
                         },
                         {
@@ -58,10 +58,13 @@ export default {
             }
         } catch (err) {
             console.error(err);
-            return interaction.createMessage({
+            await interaction.editOriginalMessage({
                 content: 'Something went wrong :(',
-                flags: 64,
             });
+            setTimeout(() => {
+                interaction.deleteOriginalMessage();
+            }, 5000);
+            return;
         }
     },
 };
