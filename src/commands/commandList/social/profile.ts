@@ -1,5 +1,5 @@
 import { Constants, Client, CommandInteraction } from 'eris';
-import * as config from "../../../config.json"
+import * as config from '../../../config.json';
 
 export default {
     data: {
@@ -22,15 +22,15 @@ export default {
                 interaction.data.options && interaction.data.options[0]
                     ? (interaction.data.options[0] as any).value
                     : interaction.member.id;
-			const user = client.users.get(ids);
+            const user = client.users.get(ids);
 
-			let profile = {
-				title: `${user.username}'s Profile`,
-				color: Number(config.colour.primary),
-				description: "Your beautiful Profile!",
-				timestamp: new Date()
-			}
-			await interaction.editOriginalMessage({ embeds: [profile]})
+            let profile = {
+                title: `${user.username}'s Profile`,
+                color: Number(config.colour.primary),
+                description: 'Your beautiful Profile!',
+                timestamp: new Date(),
+            };
+            await interaction.editOriginalMessage({ embeds: [profile] });
         } catch (err) {
             console.error(err);
             await interaction.editOriginalMessage({

@@ -35,8 +35,13 @@ exports.default = {
                         commands = {
                             title: "".concat(client.user.username, "'s Commands"),
                             color: Number(config.colour.primary),
-                            description: 'Here is our all commands',
+                            description: 'Here is our all application commands',
                             fields: [
+                                {
+                                    name: 'Social',
+                                    value: '`profile`',
+                                    inline: false,
+                                },
                                 {
                                     name: 'Actions',
                                     value: '`hug`, `cuddle`',

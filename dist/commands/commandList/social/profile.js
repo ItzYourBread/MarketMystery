@@ -34,8 +34,8 @@ exports.default = {
                         profile = {
                             title: "".concat(user.username, "'s Profile"),
                             color: Number(config.colour.primary),
-                            description: "Your beautiful Profile!",
-                            timestamp: new Date()
+                            description: 'Your beautiful Profile!',
+                            timestamp: new Date(),
                         };
                         return [4, interaction.editOriginalMessage({ embeds: [profile] })];
                     case 2:
