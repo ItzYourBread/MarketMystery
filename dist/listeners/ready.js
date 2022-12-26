@@ -6,7 +6,7 @@ var chalk_1 = tslib_1.__importDefault(require("chalk"));
 function ready(client) {
     client.on('ready', function () {
         client.editStatus('online', {
-            name: 'Daily amanzing news for Discord',
+            name: 'Stovk Markets!!!',
             type: 0,
         });
         console.log(chalk_1.default.greenBright("[Discord API] ".concat(client.user.username, " is now connected to Discord!")));

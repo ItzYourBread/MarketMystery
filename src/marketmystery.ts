@@ -6,7 +6,7 @@ import 'dotenv/config';
 
 console.clear();
 console.log(
-    chalk.greenBright(figlet.textSync('Clover.', { horizontalLayout: 'full' }))
+    chalk.greenBright(figlet.textSync('MarketMystery.', { horizontalLayout: 'full' }))
 );
 
 const client = new Client(process.env.TOKEN, {
