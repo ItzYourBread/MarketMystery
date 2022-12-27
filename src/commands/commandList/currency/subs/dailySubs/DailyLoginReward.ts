@@ -13,7 +13,33 @@ export async function DailyLoginReward(
         const Data =
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
-		let rewardCount = Data.daily.count;
+
+        let whatDay = '';
+
+        let rewardCount = Data.daily.count;
+
+        rewardCount++;
+        if (rewardCount > 7) {
+            rewardCount = 1;
+        }
+
+        if (rewardCount === 1) {
+            whatDay = 'first';
+        } else if (rewardCount === 2) {
+            whatDay = 'second';
+        } else if (rewardCount === 3) {
+            whatDay = 'third';
+        } else if (rewardCount === 4) {
+            whatDay = 'fourth';
+        } else if (rewardCount === 5) {
+            whatDay = 'fifth';
+        } else if (rewardCount === 6) {
+            whatDay = 'sixth';
+        } else if (rewardCount === 7) {
+            whatDay = 'seventh';
+        } else {
+            whatDay = 'unknown';
+        }
 
         const text = await getDailyReward(interaction);
 
@@ -22,34 +48,10 @@ export async function DailyLoginReward(
             color: Number(config.colour.primary),
             description: text,
             footer: {
-                text: `It's your ${rewardCount} day login!!`,
+                text: `It's your ${whatDay} day login!!`,
             },
             timestamp: new Date(),
         };
-
-        rewardCount++;
-        if (rewardCount > 7) {
-            rewardCount = 1;
-        }
-		
-		switch(rewardCount) {
-			case 1:
-				return "first";
-			case 2:
-				return "second";
-			case 3: 
-				return "third";
-			case 4:
-				return "fourth";
-			case 5:
-				return "fifth";
-			case 6: 
-				return "sixth";
-			case 7: 
-				return "seventh";
-			default: 
-				return "unknown";
-		}
 
         await interaction.editOriginalMessage({ embeds: [reward] });
     } catch (err) {
