@@ -8,7 +8,11 @@ var profile = new mongoose_1.Schema({
     cash: { type: Number, default: 2000 },
     bank: {
         stats: { type: Boolean, default: false },
-        cash: { type: Number, default: 0 },
+        cash: { type: Number, default: 1 },
+    },
+    daily: {
+        count: { type: Number, default: 0 },
+        time: { type: Date, default: new Date() },
     },
 });
 var Profile = mongoose_1.default.model('profile', profile);

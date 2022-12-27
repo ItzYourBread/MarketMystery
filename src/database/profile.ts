@@ -6,7 +6,11 @@ const profile: Schema = new Schema({
     cash: { type: Number, default: 2000 },
     bank: {
         stats: { type: Boolean, default: false },
-        cash: { type: Number, default: 0 },
+        cash: { type: Number, default: 1 },
+    },
+    daily: {
+        count: { type: Number, default: 0 },
+        time: { type: Date, default: new Date() },
     },
 });
 

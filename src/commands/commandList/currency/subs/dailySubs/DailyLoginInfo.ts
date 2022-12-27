@@ -1,6 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
-import { Profile } from '../../../../database/profile';
-import * as config from '../../../../config.json';
+import { Profile } from '../../../../../database/profile';
+import * as config from '../../../../../config.json';
 
 export async function DailyLoginInfo(
     client: Client,
@@ -8,7 +8,7 @@ export async function DailyLoginInfo(
 ) {
     try {
         await interaction.defer();
-		const user = interaction.member
+        const user = interaction.member;
         const Data =
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });

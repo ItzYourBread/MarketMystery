@@ -1,5 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
-import { DailyLoginInfo } from './subs/DailyLoginInfo';
+import { DailyLoginInfo } from './subs/dailySubs/DailyLoginInfo';
+import { DailyLoginReward } from './subs/dailySubs/DailyLoginReward';
 
 export default {
     data: {
@@ -21,6 +22,8 @@ export default {
     async execute(client: Client, interaction: CommandInteraction) {
         if (interaction.data.options[0].name === 'info') {
             DailyLoginInfo(client, interaction);
+        } else if (interaction.data.options[0].name === 'login') {
+            DailyLoginReward(client, interaction);
         }
     },
 };

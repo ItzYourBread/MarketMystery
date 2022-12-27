@@ -6,5 +6,9 @@ interface IProfile extends Document {
         stats: boolean;
         cash: number;
     };
+    daily: {
+        count: number;
+        time: number;
+    };
 }
 export { IProfile };
