@@ -14,19 +14,21 @@ export async function DailyLoginReward(
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
 
-		const text = await getDailyReward(interaction)
+        const text = await getDailyReward(interaction);
 
-		let reward = {
-			title: "Daily Login!!",
-			color: Number(config.colour.primary),
-			description: text,
-			footer: {
-				text: `It's your ${Data.daily.count}!!`
-			},
-			timestamp: new Date()
-		}
+        setTimeout(() => {
+            let reward = {
+                title: 'Daily Login!!',
+                color: Number(config.colour.primary),
+                description: text,
+                footer: {
+                    text: `It's your ${Data.daily.count}!!`,
+                },
+                timestamp: new Date(),
+            };
 
-		await interaction.editOriginalMessage({ embeds: [reward]})
+            interaction.editOriginalMessage({ embeds: [reward] });
+        }, 2500);
     } catch (err) {
         console.error(err);
         await interaction.editOriginalMessage({
