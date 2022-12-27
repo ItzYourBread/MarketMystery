@@ -13,30 +13,7 @@ export async function DailyLoginReward(
         const Data =
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
-
-        let rewardCount = Data.daily.count;
-
-        rewardCount++;
-        if (rewardCount > 7) {
-            rewardCount = 1;
-        }
-
-		switch(rewardCount) {
-			case 1:
-				return "first";
-			case 2:
-				return "second";
-			case 3: 
-				return "third";
-			case 4:
-				return "fourth"
-			case 5:
-				return "fifth"
-			case 6: 
-				return "sixth"
-			case 7: 
-				return "seventh"
-		}
+		let rewardCount = Data.daily.count;
 
         const text = await getDailyReward(interaction);
 
@@ -50,7 +27,31 @@ export async function DailyLoginReward(
             timestamp: new Date(),
         };
 
-        interaction.editOriginalMessage({ embeds: [reward] });
+        rewardCount++;
+        if (rewardCount > 7) {
+            rewardCount = 1;
+        }
+		
+		switch(rewardCount) {
+			case 1:
+				return "first";
+			case 2:
+				return "second";
+			case 3: 
+				return "third";
+			case 4:
+				return "fourth";
+			case 5:
+				return "fifth";
+			case 6: 
+				return "sixth";
+			case 7: 
+				return "seventh";
+			default: 
+				return "unknown";
+		}
+
+        await interaction.editOriginalMessage({ embeds: [reward] });
     } catch (err) {
         console.error(err);
         await interaction.editOriginalMessage({

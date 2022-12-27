@@ -11,7 +11,7 @@ function DailyLoginReward(client, interaction) {
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 6]);
+                    _a.trys.push([0, 5, , 7]);
                     return [4, interaction.defer()];
                 case 1:
                     _a.sent();
@@ -21,6 +21,18 @@ function DailyLoginReward(client, interaction) {
                     Data = (_a.sent()) ||
                         new profile_1.Profile({ id: user.id });
                     rewardCount = Data.daily.count;
+                    return [4, (0, getDailyReward_1.getDailyReward)(interaction)];
+                case 3:
+                    text = _a.sent();
+                    reward = {
+                        title: 'Daily Login!!',
+                        color: Number(config.colour.primary),
+                        description: text,
+                        footer: {
+                            text: "It's your ".concat(rewardCount, " day login!!"),
+                        },
+                        timestamp: new Date(),
+                    };
                     rewardCount++;
                     if (rewardCount > 7) {
                         rewardCount = 1;
@@ -40,34 +52,26 @@ function DailyLoginReward(client, interaction) {
                             return [2, "sixth"];
                         case 7:
                             return [2, "seventh"];
+                        default:
+                            return [2, "unknown"];
                     }
-                    return [4, (0, getDailyReward_1.getDailyReward)(interaction)];
-                case 3:
-                    text = _a.sent();
-                    reward = {
-                        title: 'Daily Login!!',
-                        color: Number(config.colour.primary),
-                        description: text,
-                        footer: {
-                            text: "It's your ".concat(rewardCount, " day login!!"),
-                        },
-                        timestamp: new Date(),
-                    };
-                    interaction.editOriginalMessage({ embeds: [reward] });
-                    return [3, 6];
+                    return [4, interaction.editOriginalMessage({ embeds: [reward] })];
                 case 4:
+                    _a.sent();
+                    return [3, 7];
+                case 5:
                     err_1 = _a.sent();
                     console.error(err_1);
                     return [4, interaction.editOriginalMessage({
                             content: 'Something went wrong :(',
                         })];
-                case 5:
+                case 6:
                     _a.sent();
                     setTimeout(function () {
                         interaction.deleteOriginalMessage();
                     }, 5000);
                     return [2];
-                case 6: return [2];
+                case 7: return [2];
             }
         });
     });
