@@ -20,7 +20,7 @@ function DailyLoginReward(client, interaction) {
                 case 2:
                     Data = (_a.sent()) ||
                         new profile_1.Profile({ id: user.id });
-                    whatDay = "";
+                    whatDay = '';
                     rewardCount = Data.daily.count;
                     rewardCount++;
                     if (rewardCount > 7) {
