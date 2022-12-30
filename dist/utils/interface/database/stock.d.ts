@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 interface IStock extends Document {
     ticker: string;
     company: string;

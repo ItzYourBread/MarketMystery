@@ -10,7 +10,7 @@ var stock = new mongoose_1.Schema({
     price: { type: Number },
     dividends: { type: Number },
     volatility: { type: Number },
-    shares: { type: Number }
+    shares: { type: Number },
 });
 var Stock = mongoose_1.default.model('stock', stock);
 exports.Stock = Stock;

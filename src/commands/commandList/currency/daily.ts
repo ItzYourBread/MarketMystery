@@ -1,6 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
-import { DailyLoginInfo } from './subs/dailySubs/DailyLoginInfo';
-import { DailyLoginReward } from './subs/dailySubs/DailyLoginReward';
+import { DailyLoginInfo } from './subs/daily/DailyLoginInfo';
+import { DailyLoginReward } from './subs/daily/DailyLoginReward';
 
 export default {
     data: {
@@ -20,10 +20,16 @@ export default {
         ],
     },
     async execute(client: Client, interaction: CommandInteraction) {
-        if (interaction.data.options[0].name === 'info') {
-            DailyLoginInfo(client, interaction);
-        } else if (interaction.data.options[0].name === 'login') {
-            DailyLoginReward(client, interaction);
+        switch (interaction.data.options[0].name) {
+            case 'info':
+                DailyLoginInfo(client, interaction);
+                break;
+            case 'login':
+                DailyLoginReward(client, interaction);
+                break;
+            default:
+                // no cares
+                break;
         }
     },
 };
