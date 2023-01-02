@@ -12,7 +12,7 @@ var profile = new mongoose_1.Schema({
     },
     daily: {
         count: { type: Number, default: 0 },
-        time: { type: Date, default: new Date() },
+        time: { type: Date, default: Date.now() },
     },
 });
 var Profile = mongoose_1.default.model('profile', profile);

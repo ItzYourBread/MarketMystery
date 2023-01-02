@@ -4,8 +4,6 @@ interface IStock extends Document {
     company: string;
     industry: string;
     price: number;
-    dividends: number;
-    volatility: number;
     shares: number;
 }
 export { IStock };

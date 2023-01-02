@@ -5,7 +5,7 @@ var tslib_1 = require("tslib");
 var profile_1 = require("../../../../../database/profile");
 function StockView(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, Data, err_1;
+        var user, Data, ticker, err_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -18,6 +18,7 @@ function StockView(client, interaction) {
                 case 2:
                     Data = (_a.sent()) ||
                         new profile_1.Profile({ id: user.id });
+                    ticker = (interaction.data.options[0].options[0]).value;
                     return [4, interaction.editOriginalMessage({
                             content: 'Successfully works ',
                         })];
