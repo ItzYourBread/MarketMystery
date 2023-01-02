@@ -27,7 +27,7 @@ export default {
     async execute(client: Client, interaction: CommandInteraction) {
         switch (interaction.data.options[0].name) {
             case 'view':
-				StockView(client, interaction)
+                StockView(client, interaction);
                 break;
             default:
                 // no cares

@@ -27,26 +27,19 @@ export default {
                 (await Profile.findOne({ id: user.id })) ||
                 new Profile({ id: user.id });
 
+            let load = `**Pocket:** \`${Data.cash}\``;
+
+            if (Data.bank.stats && Data.bank.cash >= 1) {
+                load += `\n**Bank:** \`${Data.bank.cash}\``;
+            }
+
             let balance = {
                 title: `${user.username}'s Balance`,
                 color: Number(config.colour.primary),
-                fields: [
-                    {
-                        name: '💰 Cash',
-                        value: `\`${Data.cash}\``,
-                        inline: true,
-                    },
-                ],
+                description: load,
                 timestamp: new Date(),
             };
 
-            if (Data.bank.stats && Data.bank.cash >= 1) {
-                balance.fields.push({
-                    name: '🏦 Bank',
-                    value: `\`${Data.bank.cash}\``,
-                    inline: true,
-                });
-            }
             await interaction.editOriginalMessage({ embeds: [balance] });
         } catch (err) {
             console.error(err);

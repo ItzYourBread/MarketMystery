@@ -19,7 +19,7 @@ exports.default = {
     },
     execute: function (client, interaction) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var ids, user, Data, balance, err_1;
+            var ids, user, Data, load, balance, err_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -35,25 +35,16 @@ exports.default = {
                     case 2:
                         Data = (_a.sent()) ||
                             new profile_1.Profile({ id: user.id });
+                        load = "**Pocket:** `".concat(Data.cash, "`");
+                        if (Data.bank.stats && Data.bank.cash >= 1) {
+                            load += "\n**Bank:** `".concat(Data.bank.cash, "`");
+                        }
                         balance = {
                             title: "".concat(user.username, "'s Balance"),
                             color: Number(config.colour.primary),
-                            fields: [
-                                {
-                                    name: '💰 Cash',
-                                    value: "`".concat(Data.cash, "`"),
-                                    inline: true,
-                                },
-                            ],
+                            description: load,
                             timestamp: new Date(),
                         };
-                        if (Data.bank.stats && Data.bank.cash >= 1) {
-                            balance.fields.push({
-                                name: '🏦 Bank',
-                                value: "`".concat(Data.bank.cash, "`"),
-                                inline: true,
-                            });
-                        }
                         return [4, interaction.editOriginalMessage({ embeds: [balance] })];
                     case 3:
                         _a.sent();

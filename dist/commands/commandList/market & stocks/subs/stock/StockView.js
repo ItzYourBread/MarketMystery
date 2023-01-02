@@ -18,7 +18,7 @@ function StockView(client, interaction) {
                 case 2:
                     Data = (_a.sent()) ||
                         new profile_1.Profile({ id: user.id });
-                    ticker = (interaction.data.options[0].options[0]).value;
+                    ticker = interaction.data.options[0].options[0].value;
                     return [4, interaction.editOriginalMessage({
                             content: 'Successfully works ',
                         })];

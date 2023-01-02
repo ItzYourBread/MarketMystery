@@ -12,7 +12,7 @@ export async function StockView(
         const Data =
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
-		const ticker = ((interaction.data.options[0] as any).options[0]).value;
+        const ticker = (interaction.data.options[0] as any).options[0].value;
 
         await interaction.editOriginalMessage({
             content: 'Successfully works ',
