@@ -1,5 +1,6 @@
 {
     "colour": {
-        "primary": "0x9EFFA1"
+        "primary": "0x9EFFA1",
+        "danger": "0xF82525"
     }
 }

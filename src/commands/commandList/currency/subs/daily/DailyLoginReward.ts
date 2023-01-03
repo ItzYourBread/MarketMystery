@@ -1,4 +1,4 @@
-import { Constants, Client, CommandInteraction } from 'eris';
+import { Client, CommandInteraction } from 'eris';
 import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 import { getDailyReward } from '../../utils/getDailyReward';
@@ -14,41 +14,39 @@ export async function DailyLoginReward(
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
 
-        let whatDay = '';
+        if (Data.daily.time > Date.now()) {
+            const timeUntilAvailable = Math.floor((Data.daily.time - Date.now()) / 1000);
 
-        let rewardCount = Data.daily.count;
-
-        rewardCount++;
-        if (rewardCount > 7) {
-            rewardCount = 1;
+            let cooldown = {
+                color: Number(config.colour.danger),
+                description: `You already claimed your daily login reward today!\n\nYour next daily login reward is available in:`,
+                fields: [
+                    {
+                        name: `Time Remaining`,
+                        value: `<t:${timeUntilAvailable}:R>`,
+                        inline: true,
+                    },
+                ],
+                footer: {
+                    text: `Daily Login Rewards`,
+                },
+                timestamp: new Date(),
+            };
+            await interaction.editOriginalMessage({ embeds: [cooldown] });
+            setTimeout(() => {
+                interaction.deleteOriginalMessage();
+            }, 15000);
+            return;
         }
 
-        if (rewardCount === 1) {
-            whatDay = 'first';
-        } else if (rewardCount === 2) {
-            whatDay = 'second';
-        } else if (rewardCount === 3) {
-            whatDay = 'third';
-        } else if (rewardCount === 4) {
-            whatDay = 'fourth';
-        } else if (rewardCount === 5) {
-            whatDay = 'fifth';
-        } else if (rewardCount === 6) {
-            whatDay = 'sixth';
-        } else if (rewardCount === 7) {
-            whatDay = 'seventh';
-        } else {
-            whatDay = 'unknown';
-        }
-
-        const text = await getDailyReward(interaction);
+        const { message, day } = await getDailyReward(interaction);
 
         let reward = {
             title: 'Daily Login!!',
             color: Number(config.colour.primary),
-            description: text,
+            description: message,
             footer: {
-                text: `It's your ${whatDay} day login!!`,
+                text: `It's your ${day} day login!!`,
             },
             timestamp: new Date(),
         };

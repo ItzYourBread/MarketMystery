@@ -1,2 +1,5 @@
 import { CommandInteraction } from 'eris';
-export declare function getDailyReward(interaction: CommandInteraction): Promise<"You have received a free item!" | "You have received 50 virtual currency!" | "You have received a free premium feature!" | "You have received a discount on your next purchase!" | "You have received a free in-game currency!" | "You have received a random item from the store!" | "You have received a special event ticket!" | "An error occurred. Please try again later.">;
+export declare function getDailyReward(interaction: CommandInteraction): Promise<{
+    message: string;
+    day: string;
+}>;

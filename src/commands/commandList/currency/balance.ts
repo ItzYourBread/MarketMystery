@@ -27,10 +27,10 @@ export default {
                 (await Profile.findOne({ id: user.id })) ||
                 new Profile({ id: user.id });
 
-            let load = `**Pocket:** \`${Data.cash}\``;
+            let load = `Here is your currency balance \`$${Data.cash}\``;
 
             if (Data.bank.stats && Data.bank.cash >= 1) {
-                load += `\n**Bank:** \`${Data.bank.cash}\``;
+                load += `\n**Bank:** \`$${Data.bank.cash}\``;
             }
 
             let balance = {

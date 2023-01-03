@@ -5,7 +5,7 @@ var tslib_1 = require("tslib");
 var profile_1 = require("../../../../database/profile");
 function getDailyReward(interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, Data, rewardDay;
+        var user, Data, rewardDay, resetTime, rewardMessage, whatDay;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -19,27 +19,48 @@ function getDailyReward(interaction) {
                     if (rewardDay > 7) {
                         rewardDay = 1;
                     }
+                    resetTime = new Date();
                     Data.daily.count = rewardDay;
+                    Data.daily.time = resetTime.setUTCHours(6, 0, 0, 0);
                     Data.save();
+                    rewardMessage = '';
+                    whatDay = '';
                     switch (rewardDay) {
                         case 1:
-                            return [2, 'You have received a free item!'];
+                            rewardMessage = 'You have received a free item!';
+                            whatDay = 'first';
+                            break;
                         case 2:
-                            return [2, 'You have received 50 virtual currency!'];
+                            rewardMessage = 'You have received 50 virtual currency!';
+                            whatDay = 'second';
+                            break;
                         case 3:
-                            return [2, 'You have received a free premium feature!'];
+                            rewardMessage = 'You have received a free premium feature!';
+                            whatDay = 'third';
+                            break;
                         case 4:
-                            return [2, 'You have received a discount on your next purchase!'];
+                            rewardMessage =
+                                'You have received a discount on your next purchase!';
+                            whatDay = 'fourth';
+                            break;
                         case 5:
-                            return [2, 'You have received a free in-game currency!'];
+                            rewardMessage = 'You have received a free in-game currency!';
+                            whatDay = 'fifth';
+                            break;
                         case 6:
-                            return [2, 'You have received a random item from the store!'];
+                            rewardMessage = 'You have received a random item from the store!';
+                            whatDay = 'sixth';
+                            break;
                         case 7:
-                            return [2, 'You have received a special event ticket!'];
+                            rewardMessage = 'You have received a special event ticket!';
+                            whatDay = 'seventh';
+                            break;
                         default:
-                            return [2, 'An error occurred. Please try again later.'];
+                            rewardMessage = 'An error occurred. Please try again later.';
+                            whatDay = 'unknown';
+                            break;
                     }
-                    return [2];
+                    return [2, { message: rewardMessage, day: whatDay }];
             }
         });
     });
