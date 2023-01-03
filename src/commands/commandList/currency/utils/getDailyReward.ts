@@ -18,7 +18,7 @@ export async function getDailyReward(interaction: CommandInteraction) {
     }
     
 	Data.daily.count = rewardDay;
-	Data.daily.time = ms("59m") - Number(moment.utc().endOf('day'))
+	Data.daily.time = Number(moment.utc().endOf('day'))
     Data.save();
 
     let rewardMessage = '';

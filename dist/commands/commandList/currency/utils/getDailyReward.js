@@ -4,7 +4,6 @@ exports.getDailyReward = void 0;
 var tslib_1 = require("tslib");
 var profile_1 = require("../../../../database/profile");
 var moment_1 = tslib_1.__importDefault(require("moment"));
-var ms_1 = tslib_1.__importDefault(require("ms"));
 function getDailyReward(interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var user, Data, rewardDay, rewardMessage, whatDay;
@@ -22,7 +21,7 @@ function getDailyReward(interaction) {
                         rewardDay = 1;
                     }
                     Data.daily.count = rewardDay;
-                    Data.daily.time = (0, ms_1.default)("59m") - Number(moment_1.default.utc().endOf('day'));
+                    Data.daily.time = Number(moment_1.default.utc().endOf('day'));
                     Data.save();
                     rewardMessage = '';
                     whatDay = '';

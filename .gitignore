@@ -3,3 +3,4 @@ replit.nix
 node_modules
 .config
 yarn.lock
+package-lock.json
