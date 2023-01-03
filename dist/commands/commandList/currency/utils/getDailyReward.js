@@ -3,9 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDailyReward = void 0;
 var tslib_1 = require("tslib");
 var profile_1 = require("../../../../database/profile");
+var moment_1 = tslib_1.__importDefault(require("moment"));
+var ms_1 = tslib_1.__importDefault(require("ms"));
 function getDailyReward(interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, Data, rewardDay, resetTime, rewardMessage, whatDay;
+        var user, Data, rewardDay, rewardMessage, whatDay;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -19,10 +21,8 @@ function getDailyReward(interaction) {
                     if (rewardDay > 7) {
                         rewardDay = 1;
                     }
-                    resetTime = new Date();
-                    resetTime.setUTCHours(0, 0, 0, 0);
                     Data.daily.count = rewardDay;
-                    Data.daily.time = resetTime.getTime();
+                    Data.daily.time = (0, ms_1.default)("59m") - Number(moment_1.default.utc().endOf('day'));
                     Data.save();
                     rewardMessage = '';
                     whatDay = '';
