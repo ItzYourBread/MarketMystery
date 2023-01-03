@@ -3,7 +3,7 @@ import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 import { getDailyReward } from '../../utils/getDailyReward';
 
-export async function DailyLoginReward(
+export async function DailyLogin(
     client: Client,
     interaction: CommandInteraction
 ) {
@@ -15,7 +15,7 @@ export async function DailyLoginReward(
             new Profile({ id: user.id });
 
         if (Data.daily.time > Date.now()) {
-            const timeUntilAvailable = Math.floor((Data.daily.time - Date.now()) / 1000);
+            const timeUntilAvailable = Math.floor((Data.daily.time - 3000) / 1000);
 
             let cooldown = {
                 color: Number(config.colour.danger),

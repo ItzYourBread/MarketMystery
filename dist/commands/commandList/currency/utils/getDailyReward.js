@@ -20,8 +20,9 @@ function getDailyReward(interaction) {
                         rewardDay = 1;
                     }
                     resetTime = new Date();
+                    resetTime.setUTCHours(0, 0, 0, 0);
                     Data.daily.count = rewardDay;
-                    Data.daily.time = resetTime.setUTCHours(6, 0, 0, 0);
+                    Data.daily.time = resetTime.getTime();
                     Data.save();
                     rewardMessage = '';
                     whatDay = '';

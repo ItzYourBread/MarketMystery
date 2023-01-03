@@ -1,6 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
-import { DailyLoginInfo } from './subs/daily/DailyLoginInfo';
-import { DailyLoginReward } from './subs/daily/DailyLoginReward';
+import { DailyInfo } from './subs/daily/DailyInfo';
+import { DailyLogin } from './subs/daily/DailyLogin';
 
 export default {
     data: {
@@ -22,10 +22,10 @@ export default {
     async execute(client: Client, interaction: CommandInteraction) {
         switch (interaction.data.options[0].name) {
             case 'info':
-                DailyLoginInfo(client, interaction);
+                DailyInfo(client, interaction);
                 break;
             case 'login':
-                DailyLoginReward(client, interaction);
+                DailyLogin(client, interaction);
                 break;
             default:
                 // no cares

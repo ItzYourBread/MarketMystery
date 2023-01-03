@@ -16,9 +16,10 @@ export async function getDailyReward(interaction: CommandInteraction) {
     }
 
     let resetTime = new Date();
+    resetTime.setUTCHours(0, 0, 0, 0); 
 
     Data.daily.count = rewardDay;
-	Data.daily.time = resetTime.setUTCHours(6, 0, 0, 0);
+	Data.daily.time = resetTime.getTime();
     Data.save();
 
     let rewardMessage = '';

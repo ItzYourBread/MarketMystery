@@ -20,8 +20,8 @@ function DailyLogin(client, interaction) {
                 case 2:
                     Data = (_b.sent()) ||
                         new profile_1.Profile({ id: user.id });
-                    if (!(Data.daily.time < Date.now())) return [3, 4];
-                    timeUntilAvailable = Math.floor((Data.daily.time - Date.now()) / 1000);
+                    if (!(Data.daily.time > Date.now())) return [3, 4];
+                    timeUntilAvailable = Math.floor((Data.daily.time - 3000) / 1000);
                     cooldown = {
                         color: Number(config.colour.danger),
                         description: "You already claimed your daily login reward today!\n\nYour next daily login reward is available in:",

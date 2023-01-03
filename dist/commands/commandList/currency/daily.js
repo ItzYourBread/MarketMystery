@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var eris_1 = require("eris");
-var DailyLoginInfo_1 = require("./subs/daily/DailyLoginInfo");
-var DailyLoginReward_1 = require("./subs/daily/DailyLoginReward");
+var DailyInfo_1 = require("./subs/daily/DailyInfo");
+var DailyLogin_1 = require("./subs/daily/DailyLogin");
 exports.default = {
     data: {
         name: 'daily',
@@ -26,10 +26,10 @@ exports.default = {
             return tslib_1.__generator(this, function (_a) {
                 switch (interaction.data.options[0].name) {
                     case 'info':
-                        (0, DailyLoginInfo_1.DailyLoginInfo)(client, interaction);
+                        (0, DailyInfo_1.DailyInfo)(client, interaction);
                         break;
                     case 'login':
-                        (0, DailyLoginReward_1.DailyLoginReward)(client, interaction);
+                        (0, DailyLogin_1.DailyLogin)(client, interaction);
                         break;
                     default:
                         break;

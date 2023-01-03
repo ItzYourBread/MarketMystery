@@ -2,7 +2,7 @@ import { Client, CommandInteraction } from 'eris';
 import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 
-export async function DailyLoginInfo(
+export async function DailyInfo(
     client: Client,
     interaction: CommandInteraction
 ) {
