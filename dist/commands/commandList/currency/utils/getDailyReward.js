@@ -22,7 +22,7 @@ function getDailyReward(interaction) {
                         rewardDay = 1;
                     }
                     Data.daily.count = rewardDay;
-                    Data.daily.time = (0, ms_1.default)("1m") + Number(moment_1.default.utc().endOf('day'));
+                    Data.daily.time = (0, ms_1.default)('1m') + Number(moment_1.default.utc().endOf('day'));
                     Data.save();
                     rewardMessage = '';
                     whatDay = '';

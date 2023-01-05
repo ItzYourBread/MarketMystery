@@ -1,23 +1,23 @@
 import { CommandInteraction } from 'eris';
 import { Profile } from '../../../../database/profile';
-import moment from "moment"
-import ms from "ms"
+import moment from 'moment';
+import ms from 'ms';
 
 export async function getDailyReward(interaction: CommandInteraction) {
     const user = interaction.member;
     const Data =
         (await Profile.findOne({ id: user.id })) ||
         new Profile({ id: user.id });
-	
+
     let rewardDay = Data.daily.count;
 
     rewardDay++;
     if (rewardDay > 7) {
         rewardDay = 1;
     }
-    
-	Data.daily.count = rewardDay;
-	Data.daily.time = ms("1m") + Number(moment.utc().endOf('day'))
+
+    Data.daily.count = rewardDay;
+    Data.daily.time = ms('1m') + Number(moment.utc().endOf('day'));
     Data.save();
 
     let rewardMessage = '';

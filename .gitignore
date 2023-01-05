@@ -4,3 +4,4 @@ node_modules
 .config
 yarn.lock
 package-lock.json
+dist/commands/commandList/ownerONLY

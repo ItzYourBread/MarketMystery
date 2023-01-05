@@ -15,7 +15,9 @@ export async function DailyLogin(
             new Profile({ id: user.id });
 
         if (Data.daily.time > Date.now()) {
-            const timeUntilAvailable = Math.floor((Data.daily.time - 3000) / 1000);
+            const timeUntilAvailable = Math.floor(
+                (Data.daily.time - 3000) / 1000
+            );
 
             let cooldown = {
                 color: Number(config.colour.danger),
