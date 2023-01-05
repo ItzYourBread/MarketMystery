@@ -46,6 +46,8 @@ export default {
     },
     async execute(client: Client, interaction: CommandInteraction) {
         try {
+			await interaction.defer();
+			
 			var options = interaction.data.options;
 			
 			const tickerOPT = (options[0] as any).value;
@@ -67,7 +69,7 @@ export default {
         } catch (err) {
             console.error(err);
             await interaction.editOriginalMessage({
-                content: 'Something went wrong :(',
+                content: 'Something went wrong or maybe its already created!',
             });
             setTimeout(() => {
                 interaction.deleteOriginalMessage();
