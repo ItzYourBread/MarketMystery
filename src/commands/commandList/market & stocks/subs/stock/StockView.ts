@@ -1,5 +1,5 @@
 import { Client, CommandInteraction } from 'eris';
-import { Profile } from '../../../../../database/profile';
+import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
 
 export async function StockView(
@@ -9,14 +9,31 @@ export async function StockView(
     try {
         await interaction.defer();
         const user = interaction.member;
-        const Data =
-            (await Profile.findOne({ id: user.id })) ||
-            new Profile({ id: user.id });
         const ticker = (interaction.data.options[0] as any).options[0].value;
+        const stock = await Stock.findOne({ ticker: ticker });
 
-        await interaction.editOriginalMessage({
-            content: 'Successfully works ',
-        });
+        let data = {
+            color: Number(config.colour.primary),
+            title: `${stock.company} (${stock.ticker})`,
+            description: `**Industry:** ${stock.industry}`,
+            fields: [
+                {
+                    name: 'Price',
+                    value: `$${stock.price.toLocaleString()}`,
+                    inline: true,
+                },
+                {
+                    name: 'Shares',
+                    value: stock.shares.toLocaleString(),
+                    inline: true,
+                },
+            ],
+            footer: {
+                text: `Stock Information`,
+            },
+            timestamp: new Date(),
+        };
+        await interaction.editOriginalMessage({ embeds: [data] });
     } catch (err) {
         console.error(err);
         await interaction.editOriginalMessage({

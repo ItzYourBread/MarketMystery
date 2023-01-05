@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var eris_1 = require("eris");
 var StockView_1 = require("./subs/stock/StockView");
+var stocks_json_1 = require("../../../json/stocks.json");
 exports.default = {
     data: {
         name: 'stock',
@@ -18,9 +19,7 @@ exports.default = {
                         type: eris_1.Constants.ApplicationCommandOptionTypes.STRING,
                         description: 'Choose a ticker please',
                         required: true,
-                        choices: [
-                            { name: 'Sparkle Systems Inc', value: 'SSI' },
-                        ],
+                        choices: stocks_json_1.StockList,
                     },
                 ],
             },

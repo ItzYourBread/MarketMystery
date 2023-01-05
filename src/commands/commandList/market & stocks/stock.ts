@@ -1,5 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
 import { StockView } from './subs/stock/StockView';
+import { StockList } from '../../../json/stocks.json';
 
 export default {
     data: {
@@ -16,9 +17,7 @@ export default {
                         type: Constants.ApplicationCommandOptionTypes.STRING,
                         description: 'Choose a ticker please',
                         required: true,
-                        choices: [
-                            { name: 'Sparkle Systems Inc', value: 'SSI' },
-                        ],
+                        choices: StockList,
                     },
                 ],
             },

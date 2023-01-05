@@ -30,32 +30,32 @@ export default {
                     },
                 ],
             },
-			{
-				name: 'price',
+            {
+                name: 'price',
                 type: Constants.ApplicationCommandOptionTypes.NUMBER,
                 description: 'price please',
                 required: true,
-			},
-			{
-				name: 'shares',
+            },
+            {
+                name: 'shares',
                 type: Constants.ApplicationCommandOptionTypes.NUMBER,
                 description: 'Shares count please',
                 required: true,
-			}
+            },
         ],
     },
     async execute(client: Client, interaction: CommandInteraction) {
         try {
-			await interaction.defer();
-			
-			var options = interaction.data.options;
-			
-			const tickerOPT = (options[0] as any).value;
-			const companyOPT = (options[1] as any).value;
-			const industryOPT = (options[2] as any).value;
-			const priceOPT = (options[3] as any).value;
-			const sharesOPT = (options[4] as any).value;
-			
+            await interaction.defer();
+
+            var options = interaction.data.options;
+
+            const tickerOPT = (options[0] as any).value;
+            const companyOPT = (options[1] as any).value;
+            const industryOPT = (options[2] as any).value;
+            const priceOPT = (options[3] as any).value;
+            const sharesOPT = (options[4] as any).value;
+
             const createdStock = await Stock.create({
                 ticker: tickerOPT,
                 company: companyOPT,
@@ -63,9 +63,9 @@ export default {
                 price: priceOPT,
                 shares: sharesOPT,
             });
-			await interaction.editOriginalMessage({
-				content: `Successfully created \`${tickerOPT}\` `
-			})
+            await interaction.editOriginalMessage({
+                content: `Successfully created \`${tickerOPT}\` `,
+            });
         } catch (err) {
             console.error(err);
             await interaction.editOriginalMessage({
