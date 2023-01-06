@@ -74,8 +74,12 @@ function StockBuy(client, interaction) {
                         },
                         timestamp: new Date(),
                     };
-                    Data.cash += 3000000;
-                    Data.stock[ticker].shares += Data.save();
+                    Data.cash -= cost;
+                    Data.stock[ticker].shares += amount;
+                    Data.save();
+                    stock.shares -= amount;
+                    stock.price += cost;
+                    stock.save();
                     return [4, interaction.editOriginalMessage({ embeds: [success] })];
                 case 6:
                     _a.sent();

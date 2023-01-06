@@ -22,7 +22,9 @@ export async function StockBuy(
             let notenough = {
                 color: Number(config.colour.danger),
                 title: 'Insufficient Funds',
-                description: `You do not have enough funds to make this purchase. You need \`$${cost.toLocaleString()}\` to buy \`${amount.toLocaleString()}\` shares of ${stock.company} (${ticker}), but you only have \`$${Data.cash.toLocaleString()}\`.`,
+                description: `You do not have enough funds to make this purchase. You need \`$${cost.toLocaleString()}\` to buy \`${amount.toLocaleString()}\` shares of ${
+                    stock.company
+                } (${ticker}), but you only have \`$${Data.cash.toLocaleString()}\`.`,
                 fields: [
                     {
                         name: 'Options',
@@ -49,7 +51,9 @@ export async function StockBuy(
         let success = {
             title: `Purchase Successful!`,
             color: Number(config.colour.primary),
-            description: `Congratulations on your successful purchase of ${amount.toLocaleString()} shares in ${stock.company} (${ticker}). Your portfolio has been updated to reflect your new ownership of these shares. Keep an eye on the market to see how your investment performs, and consider buying or selling at the right times to maximize your profits.`,
+            description: `Congratulations on your successful purchase of ${amount.toLocaleString()} shares in ${
+                stock.company
+            } (${ticker}). Your portfolio has been updated to reflect your new ownership of these shares. Keep an eye on the market to see how your investment performs, and consider buying or selling at the right times to maximize your profits.`,
             fields: [
                 {
                     name: 'Total Cost',
@@ -68,8 +72,13 @@ export async function StockBuy(
             timestamp: new Date(),
         };
 
-        Data.cash += 3000000;
-        Data.stock[ticker].shares += Data.save();
+        Data.cash -= cost;
+        Data.stock[ticker].shares += amount;
+		Data.save();
+
+		stock.shares -= amount;
+		stock.price += cost
+		stock.save();
 
         await interaction.editOriginalMessage({ embeds: [success] });
     } catch (err) {
