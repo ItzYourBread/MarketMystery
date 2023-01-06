@@ -5,7 +5,7 @@ var tslib_1 = require("tslib");
 var stock_1 = require("../database/stock");
 var ms_1 = tslib_1.__importDefault(require("ms"));
 var chalk_1 = tslib_1.__importDefault(require("chalk"));
-function StockUpdate() {
+function StockUpdate(client) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var _this = this;
         return tslib_1.__generator(this, function (_a) {

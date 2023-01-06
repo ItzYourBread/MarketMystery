@@ -1,9 +1,10 @@
-import { Stock } from "../database/stock"
-import ms from "ms";
-import chalk from "chalk"
+import { Client } from 'eris';
+import { Stock } from '../database/stock';
+import ms from 'ms';
+import chalk from 'chalk';
 
-export async function StockUpdate() {
-    setInterval( async () => {
+export async function StockUpdate(client: Client) {
+    setInterval(async () => {
         const allStocks = await Stock.find({});
 
         allStocks.forEach(async (stock) => {
@@ -27,5 +28,5 @@ export async function StockUpdate() {
             await stock.save();
         });
     }, ms('25m'));
-	console.log(chalk.magentaBright('[Stock Updater] Activated!'));
+    console.log(chalk.magentaBright('[Stock Updater] Activated!'));
 }

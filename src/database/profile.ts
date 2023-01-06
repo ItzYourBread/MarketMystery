@@ -3,7 +3,7 @@ import { IProfile } from '../utils/interface/database/profile';
 
 const profile: Schema = new Schema({
     id: { type: String, unique: true, required: true },
-    cash: { type: Number, default: 200 },
+    cash: { type: Number, default: 800 },
     bank: {
         stats: { type: Boolean, default: false },
         cash: { type: Number, default: 1 },
@@ -11,6 +11,11 @@ const profile: Schema = new Schema({
     daily: {
         count: { type: Number, default: 0 },
         time: { type: Date, default: new Date() },
+    },
+    stock: {
+        SKYT: {
+            shares: { type: Number, default: 0 },
+        },
     },
 });
 

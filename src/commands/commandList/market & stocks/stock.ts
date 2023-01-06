@@ -1,5 +1,6 @@
 import { Constants, Client, CommandInteraction } from 'eris';
 import { StockView } from './subs/stock/StockView';
+import { StockBuy } from './subs/stock/StockBuy';
 import { StockList } from '../../../json/stocks.json';
 
 export default {
@@ -21,12 +22,35 @@ export default {
                     },
                 ],
             },
+            {
+                name: 'buy',
+                type: Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Buy stock shares',
+                options: [
+                    {
+                        name: 'ticker',
+                        type: Constants.ApplicationCommandOptionTypes.STRING,
+                        description: 'Choose a ticker please',
+                        required: true,
+                        choices: StockList,
+                    },
+                    {
+                        name: 'shares',
+                        type: Constants.ApplicationCommandOptionTypes.NUMBER,
+                        description: 'Amount of shares',
+                        required: true,
+                    },
+                ],
+            },
         ],
     },
     async execute(client: Client, interaction: CommandInteraction) {
         switch (interaction.data.options[0].name) {
             case 'view':
                 StockView(client, interaction);
+                break;
+            case 'buy':
+                StockBuy(client, interaction);
                 break;
             default:
                 // no cares

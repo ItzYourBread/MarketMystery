@@ -1,1 +1,2 @@
-export declare function StockUpdate(): Promise<void>;
+import { Client } from 'eris';
+export declare function StockUpdate(client: Client): Promise<void>;

@@ -7,7 +7,7 @@ declare const _default: {
             name: string;
             type: 1;
             description: string;
-            options: {
+            options: ({
                 name: string;
                 type: 3;
                 description: string;
@@ -16,7 +16,13 @@ declare const _default: {
                     name: string;
                     value: string;
                 }[];
-            }[];
+            } | {
+                name: string;
+                type: 10;
+                description: string;
+                required: boolean;
+                choices?: undefined;
+            })[];
         }[];
     };
     execute(client: Client, interaction: CommandInteraction): Promise<void>;

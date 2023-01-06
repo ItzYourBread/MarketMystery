@@ -10,5 +10,10 @@ interface IProfile extends Document {
         count: number;
         time: number;
     };
+    stock: {
+        SKYT: {
+            shares: number;
+        };
+    };
 }
 export { IProfile };
