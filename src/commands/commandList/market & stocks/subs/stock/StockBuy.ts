@@ -74,11 +74,11 @@ export async function StockBuy(
 
         Data.cash -= cost;
         Data.stock[ticker].shares += amount;
-		Data.save();
+        Data.save();
 
-		stock.shares -= amount;
-		stock.price += cost
-		stock.save();
+        stock.shares -= amount;
+        stock.price += cost;
+        stock.save();
 
         await interaction.editOriginalMessage({ embeds: [success] });
     } catch (err) {

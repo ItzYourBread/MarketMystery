@@ -1,6 +1,6 @@
 import { Client } from 'eris';
 import chalk from 'chalk';
-import { StockUpdate } from '../utils/stockUpdate';
+import { StockUpdate } from '../utils/stock';
 
 export function ready(client: Client) {
     client.on('ready', () => {
