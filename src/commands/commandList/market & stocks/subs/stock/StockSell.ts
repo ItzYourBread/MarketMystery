@@ -3,6 +3,23 @@ import { Stock } from '../../../../../database/stock';
 import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 
+function decreasedPercentage(currentPrice: number, shares: number) {
+    const sellPrice = currentPrice * shares;
+    let decreasePercentage = 0;
+
+    if (sellPrice > 100000) {
+        decreasePercentage = 0.1;
+    } else if (sellPrice > 50000) {
+        decreasePercentage = 0.06;
+    } else if (sellPrice > 10000) {
+        decreasePercentage = 0.03;
+    } else {
+        decreasePercentage = 0.01;
+    }
+
+    return sellPrice - sellPrice * decreasePercentage;
+}
+
 export async function StockSell(
     client: Client,
     interaction: CommandInteraction
@@ -22,7 +39,7 @@ export async function StockSell(
                 color: Number(config.colour.danger),
                 description: `You don't have enough shares of **${ticker}** to sell. Please try again with a lower amount.`,
                 footer: {
-                    text: 'Stock Sell Error',
+                    text: 'Stock Sell Cancelled',
                 },
                 timestamp: new Date(),
             };
@@ -36,18 +53,20 @@ export async function StockSell(
         }
 
         const sellPrice = stock.price * amount;
+		const dropPercent = decreasedPercentage(sellPrice, amount);
+
         Data.cash += sellPrice;
         Data.stock[ticker].shares -= amount;
         Data.save();
 
         stock.shares += amount;
-        stock.price -= sellPrice;
+        stock.price -= dropPercent;
         stock.save();
 
         const success = {
             color: Number(config.colour.primary),
             title: 'Stock Sell Successful',
-            description: `You have successfully sold ${amount} shares of **${ticker}** for a total of $${sellPrice}.`,
+            description: `You have successfully sold ${amount.toLocaleString()} shares of **${ticker}** for a total of $${sellPrice.toLocaleString()}.`,
             footer: {
                 text: 'Stock Sell Success',
             },

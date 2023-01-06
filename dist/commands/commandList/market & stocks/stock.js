@@ -77,7 +77,7 @@ exports.default = {
                     case 'buy':
                         (0, StockBuy_1.StockBuy)(client, interaction);
                         break;
-                    case "sell":
+                    case 'sell':
                         (0, StockSell_1.StockSell)(client, interaction);
                     default:
                         break;

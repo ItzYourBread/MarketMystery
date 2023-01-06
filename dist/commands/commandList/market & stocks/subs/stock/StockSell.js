@@ -5,6 +5,23 @@ var tslib_1 = require("tslib");
 var stock_1 = require("../../../../../database/stock");
 var profile_1 = require("../../../../../database/profile");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
+function calculateSellPrice(currentPrice, shares) {
+    var sellPrice = currentPrice * shares;
+    var decreasePercentage = 0;
+    if (sellPrice > 100000) {
+        decreasePercentage = 0.1;
+    }
+    else if (sellPrice > 50000) {
+        decreasePercentage = 0.06;
+    }
+    else if (sellPrice > 10000) {
+        decreasePercentage = 0.03;
+    }
+    else {
+        decreasePercentage = 0.01;
+    }
+    return sellPrice - sellPrice * decreasePercentage;
+}
 function StockSell(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var user, ticker, amount, stock, Data, insufficientShares, sellPrice, success, err_1;
@@ -44,12 +61,12 @@ function StockSell(client, interaction) {
                     }, 15000);
                     return [2];
                 case 5:
-                    sellPrice = stock.price * amount;
+                    sellPrice = calculateSellPrice(stock.price, stock.shares);
                     Data.cash += sellPrice;
                     Data.stock[ticker].shares -= amount;
                     Data.save();
                     stock.shares += amount;
-                    stock.price -= sellPrice;
+                    stock.price -= 1;
                     stock.save();
                     success = {
                         color: Number(config.colour.primary),
