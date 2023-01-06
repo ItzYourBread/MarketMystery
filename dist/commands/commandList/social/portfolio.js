@@ -12,12 +12,12 @@ exports.default = {
         description: "View your & other's portfolio",
         options: [
             {
-                name: "user",
+                name: 'user',
                 type: eris_1.Constants.ApplicationCommandOptionTypes.USER,
-                description: "Select a user",
-                required: false
-            }
-        ]
+                description: 'Select a user',
+                required: false,
+            },
+        ],
     },
     execute: function (client, interaction) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {

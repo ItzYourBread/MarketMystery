@@ -4,6 +4,7 @@ var tslib_1 = require("tslib");
 var eris_1 = require("eris");
 var StockView_1 = require("./subs/stock/StockView");
 var StockBuy_1 = require("./subs/stock/StockBuy");
+var StockSell_1 = require("./subs/stock/StockSell");
 var stocks_json_1 = require("../../../json/stocks.json");
 exports.default = {
     data: {
@@ -44,6 +45,26 @@ exports.default = {
                     },
                 ],
             },
+            {
+                name: 'sell',
+                type: eris_1.Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Sell stock shares',
+                options: [
+                    {
+                        name: 'ticker',
+                        type: eris_1.Constants.ApplicationCommandOptionTypes.STRING,
+                        description: 'Choose a ticker please',
+                        required: true,
+                        choices: stocks_json_1.StockList,
+                    },
+                    {
+                        name: 'shares',
+                        type: eris_1.Constants.ApplicationCommandOptionTypes.NUMBER,
+                        description: 'Amount of shares',
+                        required: true,
+                    },
+                ],
+            },
         ],
     },
     execute: function (client, interaction) {
@@ -56,6 +77,8 @@ exports.default = {
                     case 'buy':
                         (0, StockBuy_1.StockBuy)(client, interaction);
                         break;
+                    case "sell":
+                        (0, StockSell_1.StockSell)(client, interaction);
                     default:
                         break;
                 }

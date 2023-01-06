@@ -9,18 +9,18 @@ export default {
     data: {
         name: 'portfolio',
         description: "View your & other's portfolio",
-		options: [
-			{
-				name: "user",
-				type: Constants.ApplicationCommandOptionTypes.USER,
-				description: "Select a user",
-				required: false
-			}
-		]
+        options: [
+            {
+                name: 'user',
+                type: Constants.ApplicationCommandOptionTypes.USER,
+                description: 'Select a user',
+                required: false,
+            },
+        ],
     },
     async execute(client: Client, interaction: CommandInteraction) {
         try {
-			await interaction.defer();
+            await interaction.defer();
             const ids =
                 interaction.data.options && interaction.data.options[0]
                     ? (interaction.data.options[0] as any).value
@@ -33,7 +33,7 @@ export default {
             // Create an empty portfolio object to store the user's stock information
             const portfolio: {
                 ticker: string;
-				company: string;
+                company: string;
                 shares: number;
                 value: number;
             }[] = [];
@@ -44,7 +44,7 @@ export default {
                 if (stock) {
                     portfolio.push({
                         ticker: ticker,
-						company: stock.company,
+                        company: stock.company,
                         shares: Data.stock[ticker].shares,
                         value: stock.price * Data.stock[ticker].shares,
                     });
