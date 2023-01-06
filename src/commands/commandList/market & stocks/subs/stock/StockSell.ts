@@ -52,7 +52,7 @@ export async function StockSell(
             return;
         }
 
-        const sellPrice = stock.price * amount;
+        const sellPrice = stock.price;
 		const dropPercent = decreasedPercentage(sellPrice, amount);
 
         Data.cash += sellPrice;
@@ -66,7 +66,7 @@ export async function StockSell(
         const success = {
             color: Number(config.colour.primary),
             title: 'Stock Sell Successful',
-            description: `You have successfully sold ${amount.toLocaleString()} shares of **${ticker}** for a total of $${sellPrice.toLocaleString()}.`,
+            description: `You have successfully sold \`${amount.toLocaleString()}\` shares of **${ticker}** for a total of \`$${sellPrice.toLocaleString()}\`.`,
             footer: {
                 text: 'Stock Sell Success',
             },

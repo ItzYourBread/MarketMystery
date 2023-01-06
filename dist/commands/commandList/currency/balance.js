@@ -35,7 +35,7 @@ exports.default = {
                     case 2:
                         Data = (_a.sent()) ||
                             new profile_1.Profile({ id: user.id });
-                        load = "Here is your currency balance `$".concat(Data.cash, "`");
+                        load = "Here is your currency balance `$".concat(Data.cash.toLocaleString, "`");
                         if (Data.bank.stats && Data.bank.cash >= 1) {
                             load += "\n**Bank:** `$".concat(Data.bank.cash, "`");
                         }

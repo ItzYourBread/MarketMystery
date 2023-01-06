@@ -5,7 +5,7 @@ var tslib_1 = require("tslib");
 var stock_1 = require("../../../../../database/stock");
 var profile_1 = require("../../../../../database/profile");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
-function calculateSellPrice(currentPrice, shares) {
+function decreasedPercentage(currentPrice, shares) {
     var sellPrice = currentPrice * shares;
     var decreasePercentage = 0;
     if (sellPrice > 100000) {
@@ -24,7 +24,7 @@ function calculateSellPrice(currentPrice, shares) {
 }
 function StockSell(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, ticker, amount, stock, Data, insufficientShares, sellPrice, success, err_1;
+        var user, ticker, amount, stock, Data, insufficientShares, sellPrice, dropPercent, success, err_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -47,7 +47,7 @@ function StockSell(client, interaction) {
                         color: Number(config.colour.danger),
                         description: "You don't have enough shares of **".concat(ticker, "** to sell. Please try again with a lower amount."),
                         footer: {
-                            text: 'Stock Sell Error',
+                            text: 'Stock Sell Cancelled',
                         },
                         timestamp: new Date(),
                     };
@@ -61,17 +61,18 @@ function StockSell(client, interaction) {
                     }, 15000);
                     return [2];
                 case 5:
-                    sellPrice = calculateSellPrice(stock.price, stock.shares);
+                    sellPrice = stock.price;
+                    dropPercent = decreasedPercentage(sellPrice, amount);
                     Data.cash += sellPrice;
                     Data.stock[ticker].shares -= amount;
                     Data.save();
                     stock.shares += amount;
-                    stock.price -= 1;
+                    stock.price -= dropPercent;
                     stock.save();
                     success = {
                         color: Number(config.colour.primary),
                         title: 'Stock Sell Successful',
-                        description: "You have successfully sold ".concat(amount, " shares of **").concat(ticker, "** for a total of $").concat(sellPrice, "."),
+                        description: "You have successfully sold `".concat(amount.toLocaleString(), "` shares of **").concat(ticker, "** for a total of `$").concat(sellPrice.toLocaleString(), "`."),
                         footer: {
                             text: 'Stock Sell Success',
                         },
