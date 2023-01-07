@@ -6,6 +6,11 @@ interface IStock extends Document {
     industry: string;
     price: number;
     shares: number;
+    history: {
+        date: Date;
+        price: number;
+    }[];
 }
 
 export { IStock };
+
