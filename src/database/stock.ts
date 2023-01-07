@@ -7,6 +7,10 @@ const stock: Schema = new Schema({
     industry: { type: String, required: true },
     price: { type: Number, default: 0 },
     shares: { type: Number, default: 0 },
+    history: [{
+        date: { type: Date, default: Date.now },
+        price: { type: Number, default: 0 }
+    }]
 });
 
 const Stock = mongoose.model<IStock>('stock', stock);
