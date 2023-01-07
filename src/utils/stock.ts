@@ -24,9 +24,11 @@ export async function StockUpdate(client: Client) {
                 newPrice = stock.price;
             }
 
+            stock.history.push(stock.price); // Push the current price to the history array
             stock.price = newPrice;
             await stock.save();
         });
     }, ms('25m'));
     console.log(chalk.magentaBright('[Stock Updater] Activated!'));
 }
+
