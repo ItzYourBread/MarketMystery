@@ -8,8 +8,7 @@ const stock: Schema = new Schema({
     price: { type: Number, default: 0 },
     shares: { type: Number, default: 0 },
     history: [{
-        date: { type: Date, default: Date.now },
-        price: { type: Number, default: 0 }
+        type: Number
     }]
 });
 

@@ -24,11 +24,13 @@ export async function StockUpdate(client: Client) {
                 newPrice = stock.price;
             }
 
-            stock.history.push(stock.price); // Push the current price to the history array
+			stock.history.push(newPrice);// Push the new price to the history array
             stock.price = newPrice;
             await stock.save();
+
+			console.log(chalk.white(`[New Price] $${stock.price.toLocaleString()} value for ${stock.ticker} (${stock.company})!`));
         });
-    }, ms('25m'));
+    }, ms('5s'));
     console.log(chalk.magentaBright('[Stock Updater] Activated!'));
 }
 

@@ -34,10 +34,12 @@ function StockUpdate(client) {
                                             else {
                                                 newPrice = stock.price;
                                             }
+                                            stock.history.push(newPrice);
                                             stock.price = newPrice;
                                             return [4, stock.save()];
                                         case 1:
                                             _a.sent();
+                                            console.log(chalk_1.default.white("[New Price] $".concat(stock.price.toLocaleString(), " value for ").concat(stock.ticker, " (").concat(stock.company, ")!")));
                                             return [2];
                                     }
                                 });
@@ -45,7 +47,7 @@ function StockUpdate(client) {
                             return [2];
                     }
                 });
-            }); }, (0, ms_1.default)('25m'));
+            }); }, (0, ms_1.default)('5s'));
             console.log(chalk_1.default.magentaBright('[Stock Updater] Activated!'));
             return [2];
         });
