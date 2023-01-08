@@ -25,6 +25,11 @@ function StockView(client, interaction) {
                         description: "**Industry:** ".concat(stock.industry),
                         fields: [
                             {
+                                name: 'Graph',
+                                value: "will be continuing",
+                                inline: false,
+                            },
+                            {
                                 name: 'Price',
                                 value: "$".concat(stock.price.toLocaleString()),
                                 inline: true,

@@ -53,7 +53,7 @@ export async function StockSell(
         }
 
         const sellPrice = stock.price;
-		const dropPercent = decreasedPercentage(sellPrice, amount);
+        const dropPercent = decreasedPercentage(sellPrice, amount);
 
         Data.cash += sellPrice;
         Data.stock[ticker].shares -= amount;

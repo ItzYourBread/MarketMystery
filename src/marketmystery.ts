@@ -11,6 +11,8 @@ console.log(
     )
 );
 
+import './api';
+
 const client = new Client(process.env.TOKEN, {
     restMode: true,
     autoreconnect: true,

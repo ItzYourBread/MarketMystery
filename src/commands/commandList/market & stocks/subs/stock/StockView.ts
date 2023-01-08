@@ -1,6 +1,7 @@
 import { Client, CommandInteraction } from 'eris';
 import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
+import { StockGraph } from '../../../../../utils/graph';
 
 export async function StockView(
     client: Client,
@@ -17,6 +18,11 @@ export async function StockView(
             title: `${stock.company} (${stock.ticker})`,
             description: `**Industry:** ${stock.industry}`,
             fields: [
+                {
+                    name: 'Graph',
+                    value: `will be continuing`,
+                    inline: false,
+                },
                 {
                     name: 'Price',
                     value: `$${stock.price.toLocaleString()}`,

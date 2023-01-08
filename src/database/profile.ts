@@ -10,7 +10,7 @@ const profile: Schema = new Schema({
     },
     daily: {
         count: { type: Number, default: 0 },
-        time: { type: Date, default: new Date() },
+        time: { type: Date },
     },
     stock: {
         SKYT: {

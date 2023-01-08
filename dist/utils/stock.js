@@ -18,23 +18,23 @@ function StockUpdate(client) {
                         case 1:
                             allStocks = _a.sent();
                             allStocks.forEach(function (stock) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                                var randomPercentage, newPrice, increaseAmount, decreaseAmount;
+                                var newPrice, increaseAmount, decreaseAmount;
                                 return tslib_1.__generator(this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
-                                            randomPercentage = Math.random();
-                                            if (randomPercentage < 0.4) {
+                                            if (Math.random() < 0.5) {
                                                 increaseAmount = Math.random() * 0.1 + 0.01;
                                                 newPrice = stock.price * (1 + increaseAmount);
                                             }
-                                            else if (randomPercentage > 0.6) {
+                                            else {
                                                 decreaseAmount = Math.random() * 0.1 + 0.01;
                                                 newPrice = stock.price * (1 - decreaseAmount);
                                             }
-                                            else {
-                                                newPrice = stock.price;
-                                            }
-                                            stock.history.push(newPrice);
+                                            stock.history.push({
+                                                time: new Date(),
+                                                price: newPrice,
+                                                status: newPrice > stock.price ? 'up' : 'down',
+                                            });
                                             stock.price = newPrice;
                                             return [4, stock.save()];
                                         case 1:
@@ -47,7 +47,7 @@ function StockUpdate(client) {
                             return [2];
                     }
                 });
-            }); }, (0, ms_1.default)('5s'));
+            }); }, (0, ms_1.default)('15m'));
             console.log(chalk_1.default.magentaBright('[Stock Updater] Activated!'));
             return [2];
         });
