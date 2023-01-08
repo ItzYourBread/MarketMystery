@@ -8,6 +8,7 @@ var chalk_1 = tslib_1.__importDefault(require("chalk"));
 require("dotenv/config");
 console.clear();
 console.log(chalk_1.default.greenBright(figlet_1.default.textSync('MarketMystery.', { horizontalLayout: 'full' })));
+require("./api");
 var client = new eris_1.Client(process.env.TOKEN, {
     restMode: true,
     autoreconnect: true,
