@@ -16,7 +16,7 @@ function Trend(history) {
         }
         var dateString = time[i];
         var date = new Date(dateString);
-        var timestamp = date.getTime();
+        var timestamp = Math.floor((date.getTime() - 3000) / 1000);
         chart += "<t:".concat(timestamp, ":R> : ").concat(price[i].toLocaleString(), " ").concat(symbol, "\n");
     }
     return chart;

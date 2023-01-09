@@ -18,7 +18,9 @@ export function Trend(
 
         const dateString = time[i];
         const date = new Date(dateString);
-        const timestamp = date.getTime();
+        const timestamp = Math.floor(
+                (date.getTime() - 3000) / 1000
+            );
 
         chart += `<t:${timestamp}:R> : ${price[
             i
