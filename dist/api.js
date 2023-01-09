@@ -4,7 +4,18 @@ var tslib_1 = require("tslib");
 var express_1 = tslib_1.__importDefault(require("express"));
 var stock_1 = require("./database/stock");
 require("dotenv/config");
+var secretKey = 'kOBJ17rPD4ijusnr9ow6DQ9BdR1z0YVl';
 var app = (0, express_1.default)();
+var checkKey = function (req, res, next) {
+    var key = req.query.key;
+    if (key !== secretKey) {
+        return res
+            .status(401)
+            .send('Invalid key You can find the key from documents!');
+    }
+    next();
+};
+app.use(checkKey);
 app.get('/stock/:ticker', function (req, res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var ticker, stock;
     return tslib_1.__generator(this, function (_a) {
@@ -24,5 +35,5 @@ app.get('/stock/:ticker', function (req, res) { return tslib_1.__awaiter(void 0,
     });
 }); });
 app.listen(process.env.PORT, function () {
-    console.log('API listening on port ' + process.env.PORT);
+    console.log('Server listening on port 3000');
 });
