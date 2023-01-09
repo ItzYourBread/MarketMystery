@@ -2,9 +2,12 @@ import { Client, CommandInteraction } from 'eris';
 import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
 import { Trend } from '../../../../../utils/trend';
+import fetch from 'node-fetch';
 
 async function trend() {
-    const response = await fetch(process.env.TOKEN);
+    const response = await fetch(
+        'http://103.60.13.252:20239/stock/SKYT?key=kOBJ17rPD4ijusnr9ow6DQ9BdR1z0YVl'
+    );
     const data = await response.json();
     return await Trend(data);
 }
@@ -26,7 +29,7 @@ export async function StockView(
             fields: [
                 {
                     name: 'Trend',
-                    value: `${trend()}`,
+                    value: `${await trend()}`,
                     inline: false,
                 },
                 {

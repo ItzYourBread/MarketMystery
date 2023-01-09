@@ -13,7 +13,11 @@ export function Trend(
         } else if (status[i] === 'down') {
             symbol = '🔻';
         }
-        chart += `<t:${time[i]}:R> : ${price[i].toLocaleString()} ${symbol}\n`;
+        const timestamp = Math.floor((time[i] - 3000) / 1000);
+
+        chart += `<t:${timestamp}:R> : ${price[
+            i
+        ].toLocaleString()} ${symbol}\n`;
     }
     return chart;
 }
