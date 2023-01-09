@@ -1,7 +1,13 @@
 import { Client, CommandInteraction } from 'eris';
 import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
-import { StockGraph } from '../../../../../utils/graph';
+import { Trend } from '../../../../../utils/trend';
+
+async function trend() {
+    const response = await fetch(process.env.TOKEN);
+    const data = await response.json();
+    return await Trend(data);
+}
 
 export async function StockView(
     client: Client,
@@ -19,8 +25,8 @@ export async function StockView(
             description: `**Industry:** ${stock.industry}`,
             fields: [
                 {
-                    name: 'Graph',
-                    value: `will be continuing`,
+                    name: 'Trend',
+                    value: `${trend()}`,
                     inline: false,
                 },
                 {

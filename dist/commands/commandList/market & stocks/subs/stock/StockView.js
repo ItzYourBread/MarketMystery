@@ -4,6 +4,24 @@ exports.StockView = void 0;
 var tslib_1 = require("tslib");
 var stock_1 = require("../../../../../database/stock");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
+var trend_1 = require("../../../../../utils/trend");
+function trend() {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return tslib_1.__generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, fetch(process.env.TOKEN)];
+                case 1:
+                    response = _a.sent();
+                    return [4, response.json()];
+                case 2:
+                    data = _a.sent();
+                    return [4, (0, trend_1.Trend)(data)];
+                case 3: return [2, _a.sent()];
+            }
+        });
+    });
+}
 function StockView(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var user, ticker, stock, data, err_1;
@@ -25,8 +43,8 @@ function StockView(client, interaction) {
                         description: "**Industry:** ".concat(stock.industry),
                         fields: [
                             {
-                                name: 'Graph',
-                                value: "will be continuing",
+                                name: 'Trend',
+                                value: "".concat(trend()),
                                 inline: false,
                             },
                             {
