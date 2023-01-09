@@ -18,7 +18,7 @@ export async function StockUpdate(ticker: String) {
         }
 
         stock.history.push({
-            time: new Date(),
+            time: Number(new Date()),
             price: newPrice,
             status: newPrice > stock.price ? 'up' : 'down',
         });
@@ -32,10 +32,6 @@ export async function StockUpdate(ticker: String) {
                 } (${stock.company})!`
             )
         );
-    }, ms('25m'));
-    console.log(
-        chalk.magentaBright(
-            `[Stock Updater] ${ticker} Activated!`
-        )
-    );
+    }, ms('30m'));
+    console.log(chalk.magentaBright(`[Stock Updater] ${ticker} Activated!`));
 }

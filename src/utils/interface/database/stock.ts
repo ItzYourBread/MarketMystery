@@ -7,7 +7,7 @@ interface IStock extends Document {
     price: number;
     shares: number;
     history: {
-        time: Date;
+        time: number;
         price: number;
         status: string;
     }[];

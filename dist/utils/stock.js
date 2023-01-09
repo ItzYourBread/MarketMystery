@@ -25,7 +25,7 @@ function StockUpdate(ticker) {
                                 newPrice = stock.price * (1 - decreaseAmount);
                             }
                             stock.history.push({
-                                time: new Date(),
+                                time: Number(new Date()),
                                 price: newPrice,
                                 status: newPrice > stock.price ? 'up' : 'down',
                             });
@@ -37,7 +37,7 @@ function StockUpdate(ticker) {
                             return [2];
                     }
                 });
-            }); }, (0, ms_1.default)('25m'));
+            }); }, (0, ms_1.default)('30m'));
             console.log(chalk_1.default.magentaBright("[Stock Updater] ".concat(ticker, " Activated!")));
             return [2];
         });

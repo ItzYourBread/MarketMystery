@@ -1,5 +1,5 @@
 export declare function Trend(history: {
-    time: number;
+    time: string;
     price: number;
     status: string;
 }[]): string;

@@ -14,7 +14,8 @@ function Trend(history) {
         else if (status[i] === 'down') {
             symbol = '🔻';
         }
-        var timestamp = Math.floor((time[i] - 3000) / 1000);
+        var date = new Date(time[i]);
+        var timestamp = date.toLocaleString();
         chart += "<t:".concat(timestamp, ":R> : ").concat(price[i].toLocaleString(), " ").concat(symbol, "\n");
     }
     return chart;

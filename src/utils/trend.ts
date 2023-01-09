@@ -1,5 +1,5 @@
 export function Trend(
-    history: { time: number; price: number; status: string }[]
+    history: { time: string; price: number; status: string }[]
 ) {
     const price = history.slice(-7).map((h) => h.price);
     const status = history.slice(-7).map((h) => h.status);
@@ -13,7 +13,10 @@ export function Trend(
         } else if (status[i] === 'down') {
             symbol = '🔻';
         }
-        const timestamp = Math.floor((time[i] - 3000) / 1000);
+
+        // Convert the timestamp to a human-readable string
+        const date = new Date(time[i]);
+        const timestamp = date.toLocaleString();
 
         chart += `<t:${timestamp}:R> : ${price[
             i
