@@ -3,7 +3,7 @@ import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
 import { Trend } from '../../../../../utils/trend';
 import fetch from 'node-fetch';
-import "dotenv/config"
+import 'dotenv/config';
 
 async function trend() {
     const response = await fetch(
