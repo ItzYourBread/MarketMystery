@@ -15,6 +15,7 @@ export function ready(client: Client) {
         );
 
         StockUpdate('SKYT');
+		StockUpdate("GKYN")
     });
     console.log(chalk.cyanBright('[Listener] Ready is loaded'));
 }

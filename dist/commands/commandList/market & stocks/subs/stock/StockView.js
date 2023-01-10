@@ -7,12 +7,12 @@ var config = tslib_1.__importStar(require("../../../../../config.json"));
 var trend_1 = require("../../../../../utils/trend");
 var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
 require("dotenv/config");
-function trend() {
+function trend(ticker) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var response, data;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.252:20239/stock/SKYT" + process.env.API_KEY)];
+                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.252:20239/stock/".concat(ticker) + process.env.API_KEY)];
                 case 1:
                     response = _a.sent();
                     return [4, response.json()];
@@ -49,7 +49,7 @@ function StockView(client, interaction) {
                         name: 'Trend'
                     };
                     _a = "".concat;
-                    return [4, trend()];
+                    return [4, trend(ticker)];
                 case 3:
                     data = (_b.fields = [
                         (_c.value = _a.apply("", [_d.sent()]),

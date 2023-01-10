@@ -12,6 +12,7 @@ function ready(client) {
         });
         console.log(chalk_1.default.greenBright("[Discord API] ".concat(client.user.username, " is now connected to Discord!")));
         (0, stock_1.StockUpdate)('SKYT');
+        (0, stock_1.StockUpdate)("GKYN");
     });
     console.log(chalk_1.default.cyanBright('[Listener] Ready is loaded'));
 }

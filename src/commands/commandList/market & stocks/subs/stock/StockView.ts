@@ -5,9 +5,9 @@ import { Trend } from '../../../../../utils/trend';
 import fetch from 'node-fetch';
 import 'dotenv/config';
 
-async function trend() {
+async function trend(ticker: String) {
     const response = await fetch(
-        `http://103.60.13.252:20239/stock/SKYT` + process.env.API_KEY
+        `http://103.60.13.252:20239/stock/${ticker}` + process.env.API_KEY
     );
     const data = await response.json();
     return await Trend(data);
@@ -30,7 +30,7 @@ export async function StockView(
             fields: [
                 {
                     name: 'Trend',
-                    value: `${await trend()}`,
+                    value: `${await trend(ticker)}`,
                     inline: false,
                 },
                 {
