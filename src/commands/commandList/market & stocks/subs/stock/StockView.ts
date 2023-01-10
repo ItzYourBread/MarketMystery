@@ -3,10 +3,11 @@ import { Stock } from '../../../../../database/stock';
 import * as config from '../../../../../config.json';
 import { Trend } from '../../../../../utils/trend';
 import fetch from 'node-fetch';
+import "dotenv/config"
 
 async function trend() {
     const response = await fetch(
-        'http://103.60.13.252:20239/stock/SKYT?key=kOBJ17rPD4ijusnr9ow6DQ9BdR1z0YVl'
+        `http://103.60.13.252:20239/stock/SKYT` + process.env.API_KEY
     );
     const data = await response.json();
     return await Trend(data);

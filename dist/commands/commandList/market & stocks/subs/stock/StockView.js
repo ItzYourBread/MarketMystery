@@ -6,12 +6,13 @@ var stock_1 = require("../../../../../database/stock");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
 var trend_1 = require("../../../../../utils/trend");
 var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
+require("dotenv/config");
 function trend() {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var response, data;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, (0, node_fetch_1.default)('http://103.60.13.252:20239/stock/SKYT?key=kOBJ17rPD4ijusnr9ow6DQ9BdR1z0YVl')];
+                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.252:20239/stock/SKYT" + process.env.API_KEY)];
                 case 1:
                     response = _a.sent();
                     return [4, response.json()];
