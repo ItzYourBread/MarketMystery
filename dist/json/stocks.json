@@ -1,0 +1,12 @@
+{
+    "StockList": [
+        {
+            "name": "SKYT (SkyTech)",
+            "value": "SKYT"
+        },
+        {
+            "name": "GKYN (GeekyOrion)",
+            "value": "GKYN"
+        }
+    ]
+}
