@@ -17,6 +17,35 @@ export async function StockBuy(
             (await Profile.findOne({ id: user.id })) ||
             new Profile({ id: user.id });
 
+        if (stock.shares < amount) {
+            let notenough = {
+                color: Number(config.colour.danger),
+                title: 'Not Enough Shares',
+                description: `There are not enough shares available to complete your purchase. There are only \`${stock.shares.toLocaleString()}\` shares available of ${
+                    stock.company
+                } (${
+                    stock.ticker
+                }), but you are trying to buy \`${amount}\` shares.`,
+                fields: [
+                    {
+                        name: 'Options',
+                        value: 'You can either: \n\n- Wait until more shares become available \n- Purchase a different stock',
+                        inline: false,
+                    },
+                ],
+                footer: {
+                    text: `Stock Market`,
+                },
+                timestamp: new Date(),
+            };
+
+            await interaction.editOriginalMessage({ embeds: [notenough] });
+            setTimeout(() => {
+                interaction.deleteOriginalMessage();
+            }, 15000);
+            return;
+        }
+
         const cost = stock.price * amount;
         if (Data.cash < cost) {
             let notenough = {
