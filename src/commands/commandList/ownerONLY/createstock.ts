@@ -28,10 +28,10 @@ export default {
                         name: 'Technology',
                         value: 'Technology',
                     },
-					{
-						name: "Software Development",
-						value: "Software Development"
-					}
+                    {
+                        name: 'Software Development',
+                        value: 'Software Development',
+                    },
                 ],
             },
             {

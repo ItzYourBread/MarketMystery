@@ -6,7 +6,7 @@ const profile: Schema = new Schema({
     cash: { type: Number, default: 800 },
     bank: {
         stats: { type: Boolean, default: false },
-        cash: { type: Number, default: 1 },
+        cash: { type: Number, default: 0 },
     },
     daily: {
         count: { type: Number, default: 0 },
@@ -14,6 +14,9 @@ const profile: Schema = new Schema({
     },
     stock: {
         SKYT: {
+            shares: { type: Number, default: 0 },
+        },
+        GKYN: {
             shares: { type: Number, default: 0 },
         },
     },

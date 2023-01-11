@@ -8,7 +8,7 @@ var profile = new mongoose_1.Schema({
     cash: { type: Number, default: 800 },
     bank: {
         stats: { type: Boolean, default: false },
-        cash: { type: Number, default: 1 },
+        cash: { type: Number, default: 0 },
     },
     daily: {
         count: { type: Number, default: 0 },
@@ -16,6 +16,9 @@ var profile = new mongoose_1.Schema({
     },
     stock: {
         SKYT: {
+            shares: { type: Number, default: 0 },
+        },
+        GKYN: {
             shares: { type: Number, default: 0 },
         },
     },

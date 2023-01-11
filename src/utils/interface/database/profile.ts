@@ -15,6 +15,9 @@ interface IProfile extends Document {
         SKYT: {
             shares: number;
         };
+        GKYN: {
+            shares: number;
+        };
     };
 }
 

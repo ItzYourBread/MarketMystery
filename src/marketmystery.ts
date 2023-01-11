@@ -30,6 +30,7 @@ const client = new Client(process.env.TOKEN, {
 database.connect();
 
 listener.ready(client);
+listener.error(client);
 listener.shardReady(client);
 listener.interactionCreate(client);
 
