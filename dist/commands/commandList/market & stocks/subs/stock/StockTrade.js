@@ -6,19 +6,22 @@ var profile_1 = require("../../../../../database/profile");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
 function StockTrade(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var sender, receiver, ticker, amount, error, senderProfile, error, receiverProfile, newSenderShares, newReceiverShares, success, err_1;
+        var sender, user, ticker, amount, receiver, error, senderProfile, error, receiverProfile, newSenderShares, newReceiverShares, success, err_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 11, , 13]);
+                    _a.trys.push([0, 10, , 12]);
                     return [4, interaction.defer()];
                 case 1:
                     _a.sent();
                     sender = interaction.member;
-                    receiver = interaction.data.options[0].options[0].value;
+                    user = interaction.data.options[0].options[0].value;
                     ticker = interaction.data.options[0].options[1].value;
                     amount = interaction.data.options[0].options[2].value;
-                    if (!!receiver) return [3, 3];
+                    return [4, client.users.get(user)];
+                case 2:
+                    receiver = _a.sent();
+                    if (!!receiver) return [3, 4];
                     error = {
                         color: Number(config.colour.danger),
                         title: 'Invalid User',
@@ -33,7 +36,7 @@ function StockTrade(client, interaction) {
                                 name: 'Solution',
                                 value: 'Please select a user that is currently a member of this server.',
                                 inline: false,
-                            }
+                            },
                         ],
                         footer: {
                             text: "Stock Market",
@@ -41,17 +44,17 @@ function StockTrade(client, interaction) {
                         timestamp: new Date(),
                     };
                     return [4, interaction.editOriginalMessage({ embeds: [error] })];
-                case 2:
+                case 3:
                     _a.sent();
                     setTimeout(function () {
                         interaction.deleteOriginalMessage();
                     }, 15000);
                     return [2];
-                case 3: return [4, profile_1.Profile.findOne({ id: sender.id })];
-                case 4:
+                case 4: return [4, profile_1.Profile.findOne({ id: sender.id })];
+                case 5:
                     senderProfile = (_a.sent()) ||
                         new profile_1.Profile({ id: sender.id });
-                    if (!(!senderProfile || senderProfile.stock[ticker].shares < amount)) return [3, 6];
+                    if (!(senderProfile.stock[ticker].shares < amount)) return [3, 7];
                     error = {
                         color: Number(config.colour.danger),
                         title: 'Not Enough Shares',
@@ -69,27 +72,22 @@ function StockTrade(client, interaction) {
                         timestamp: new Date(),
                     };
                     return [4, interaction.editOriginalMessage({ embeds: [error] })];
-                case 5:
+                case 6:
                     _a.sent();
                     setTimeout(function () {
                         interaction.deleteOriginalMessage();
                     }, 15000);
                     return [2];
-                case 6:
-                    senderProfile.stock[ticker].shares -= amount;
-                    return [4, senderProfile.save()];
-                case 7:
-                    _a.sent();
-                    return [4, profile_1.Profile.findOne({ id: receiver.id })];
+                case 7: return [4, profile_1.Profile.findOne({ id: receiver.id })];
                 case 8:
                     receiverProfile = (_a.sent()) ||
                         new profile_1.Profile({ id: receiver.id });
-                    receiverProfile.stock[ticker].shares += amount;
-                    return [4, receiverProfile.save()];
-                case 9:
-                    _a.sent();
                     newSenderShares = senderProfile.stock[ticker].shares - amount;
                     newReceiverShares = receiverProfile.stock[ticker].shares + amount;
+                    senderProfile.stock[ticker].shares -= amount;
+                    senderProfile.save();
+                    receiverProfile.stock[ticker].shares += amount;
+                    receiverProfile.save();
                     success = {
                         color: Number(config.colour.primary),
                         title: 'Trade Successful',
@@ -111,10 +109,10 @@ function StockTrade(client, interaction) {
                                 inline: false,
                             },
                             {
-                                name: 'Receiver\'s New Share Balance',
+                                name: "Receiver's New Share Balance",
                                 value: "".concat(receiver.username, "'s new share balance for ").concat(ticker, " is ").concat(newReceiverShares, " shares."),
                                 inline: false,
-                            }
+                            },
                         ],
                         footer: {
                             text: "Stock Market",
@@ -122,22 +120,22 @@ function StockTrade(client, interaction) {
                         timestamp: new Date(),
                     };
                     return [4, interaction.editOriginalMessage({ embeds: [success] })];
-                case 10:
+                case 9:
                     _a.sent();
-                    return [3, 13];
-                case 11:
+                    return [3, 12];
+                case 10:
                     err_1 = _a.sent();
                     console.error(err_1);
                     return [4, interaction.editOriginalMessage({
                             content: 'Something went wrong :(',
                         })];
-                case 12:
+                case 11:
                     _a.sent();
                     setTimeout(function () {
                         interaction.deleteOriginalMessage();
                     }, 5000);
                     return [2];
-                case 13: return [2];
+                case 12: return [2];
             }
         });
     });

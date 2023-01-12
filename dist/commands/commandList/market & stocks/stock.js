@@ -72,10 +72,10 @@ exports.default = {
                 description: 'Trade stock shares',
                 options: [
                     {
-                        name: "user",
+                        name: 'user',
                         type: eris_1.Constants.ApplicationCommandOptionTypes.USER,
-                        description: "Select a user",
-                        required: true
+                        description: 'Select a user',
+                        required: true,
                     },
                     {
                         name: 'ticker',
@@ -91,7 +91,7 @@ exports.default = {
                         required: true,
                     },
                 ],
-            }
+            },
         ],
     },
     execute: function (client, interaction) {
@@ -107,7 +107,7 @@ exports.default = {
                     case 'sell':
                         (0, StockSell_1.StockSell)(client, interaction);
                         break;
-                    case "trade":
+                    case 'trade':
                         (0, StockTrade_1.StockTrade)(client, interaction);
                         break;
                     default:

@@ -1,5 +1,4 @@
 import { Client, CommandInteraction } from 'eris';
-import { Stock } from '../../../../../database/stock';
 import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 
@@ -10,9 +9,11 @@ export async function StockTrade(
     try {
         await interaction.defer();
         const sender = interaction.member;
-        const receiver = (interaction.data.options[0] as any).options[0].value;
+        const user = (interaction.data.options[0] as any).options[0].value;
         const ticker = (interaction.data.options[0] as any).options[1].value;
         const amount = (interaction.data.options[0] as any).options[2].value;
+
+		const receiver = await client.users.get(user);
 
         // check if receiver is a valid user
         if (!receiver) {
@@ -48,7 +49,7 @@ export async function StockTrade(
         const senderProfile =
             (await Profile.findOne({ id: sender.id })) ||
             new Profile({ id: sender.id });
-        if (!senderProfile || senderProfile.stock[ticker].shares < amount) {
+        if (senderProfile.stock[ticker].shares < amount) {
             let error = {
                 color: Number(config.colour.danger),
                 title: 'Not Enough Shares',
@@ -72,18 +73,20 @@ export async function StockTrade(
             return;
         }
 
-        // update sender and receiver shares
-        senderProfile.stock[ticker].shares -= amount;
-        await senderProfile.save();
-
-        const receiverProfile =
+		const receiverProfile =
             (await Profile.findOne({ id: receiver.id })) ||
             new Profile({ id: receiver.id });
-        receiverProfile.stock[ticker].shares += amount;
-        await receiverProfile.save();
 
         let newSenderShares = senderProfile.stock[ticker].shares - amount;
         let newReceiverShares = receiverProfile.stock[ticker].shares + amount;
+
+		// update sender and receiver shares
+        senderProfile.stock[ticker].shares -= amount;
+        senderProfile.save();
+		
+        receiverProfile.stock[ticker].shares += amount;
+        receiverProfile.save();
+		
         // send success message
         let success = {
             color: Number(config.colour.primary),
