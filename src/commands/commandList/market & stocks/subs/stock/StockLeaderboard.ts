@@ -32,7 +32,7 @@ export async function StockLeaderboard(
         });
 
         // Get the top 10 users and their portfolio value
-        const topUsers = sortedUsers.slice(0, 10);
+        const topUsers = sortedUsers.slice(-10);
 
         // Create a list of fields for the leaderboard embed
         let list: String = "";

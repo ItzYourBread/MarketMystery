@@ -40,7 +40,7 @@ function StockLeaderboard(client, interaction) {
                     sortedUsers = Object.keys(portfolioValues_1).sort(function (a, b) {
                         return portfolioValues_1[b] - portfolioValues_1[a];
                     });
-                    topUsers = sortedUsers.slice(0, 10);
+                    topUsers = sortedUsers.slice(-10);
                     list = "";
                     for (i = 0; i < topUsers.length; i++) {
                         user = client.users.get(topUsers[i]);
