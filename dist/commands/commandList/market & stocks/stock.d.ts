@@ -9,6 +9,12 @@ declare const _default: {
             description: string;
             options: ({
                 name: string;
+                type: 6;
+                description: string;
+                required: boolean;
+                choices?: undefined;
+            } | {
+                name: string;
                 type: 3;
                 description: string;
                 required: boolean;

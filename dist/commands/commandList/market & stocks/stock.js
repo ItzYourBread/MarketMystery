@@ -5,6 +5,7 @@ var eris_1 = require("eris");
 var StockView_1 = require("./subs/stock/StockView");
 var StockBuy_1 = require("./subs/stock/StockBuy");
 var StockSell_1 = require("./subs/stock/StockSell");
+var StockTrade_1 = require("./subs/stock/StockTrade");
 var stocks_json_1 = require("../../../json/stocks.json");
 exports.default = {
     data: {
@@ -65,6 +66,32 @@ exports.default = {
                     },
                 ],
             },
+            {
+                name: 'trade',
+                type: eris_1.Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Trade stock shares',
+                options: [
+                    {
+                        name: "user",
+                        type: eris_1.Constants.ApplicationCommandOptionTypes.USER,
+                        description: "Select a user",
+                        required: true
+                    },
+                    {
+                        name: 'ticker',
+                        type: eris_1.Constants.ApplicationCommandOptionTypes.STRING,
+                        description: 'Choose a ticker please',
+                        required: true,
+                        choices: stocks_json_1.StockList,
+                    },
+                    {
+                        name: 'shares',
+                        type: eris_1.Constants.ApplicationCommandOptionTypes.NUMBER,
+                        description: 'Amount of shares',
+                        required: true,
+                    },
+                ],
+            }
         ],
     },
     execute: function (client, interaction) {
@@ -79,6 +106,10 @@ exports.default = {
                         break;
                     case 'sell':
                         (0, StockSell_1.StockSell)(client, interaction);
+                        break;
+                    case "trade":
+                        (0, StockTrade_1.StockTrade)(client, interaction);
+                        break;
                     default:
                         break;
                 }
