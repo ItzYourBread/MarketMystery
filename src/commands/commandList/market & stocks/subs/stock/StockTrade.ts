@@ -19,8 +19,7 @@ export async function StockTrade(
             let error = {
                 color: Number(config.colour.danger),
                 title: 'Invalid User',
-                description:
-                    'Please select a valid user to trade shares with.',
+                description: 'Please select a valid user to trade shares with.',
                 fields: [
                     {
                         name: 'Reason',
@@ -31,7 +30,7 @@ export async function StockTrade(
                         name: 'Solution',
                         value: 'Please select a user that is currently a member of this server.',
                         inline: false,
-                    }
+                    },
                 ],
                 footer: {
                     text: `Stock Market`,
@@ -83,8 +82,8 @@ export async function StockTrade(
         receiverProfile.stock[ticker].shares += amount;
         await receiverProfile.save();
 
-		let newSenderShares = senderProfile.stock[ticker].shares - amount;
-		let newReceiverShares = receiverProfile.stock[ticker].shares + amount;
+        let newSenderShares = senderProfile.stock[ticker].shares - amount;
+        let newReceiverShares = receiverProfile.stock[ticker].shares + amount;
         // send success message
         let success = {
             color: Number(config.colour.primary),
@@ -107,10 +106,10 @@ export async function StockTrade(
                     inline: false,
                 },
                 {
-                    name: 'Receiver\'s New Share Balance',
+                    name: "Receiver's New Share Balance",
                     value: `${receiver.username}'s new share balance for ${ticker} is ${newReceiverShares} shares.`,
                     inline: false,
-                }
+                },
             ],
             footer: {
                 text: `Stock Market`,
