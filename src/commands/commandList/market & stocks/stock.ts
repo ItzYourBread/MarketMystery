@@ -3,6 +3,7 @@ import { StockView } from './subs/stock/StockView';
 import { StockBuy } from './subs/stock/StockBuy';
 import { StockSell } from './subs/stock/StockSell';
 import { StockTrade } from './subs/stock/StockTrade';
+import { StockLeaderboard } from './subs/stock/StockLeaderboard';
 import { StockList } from '../../../json/stocks.json';
 
 export default {
@@ -90,6 +91,11 @@ export default {
                     },
                 ],
             },
+            {
+                name: 'leaderboard',
+                type: Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Leaderboard of the stock market',
+            },
         ],
     },
     async execute(client: Client, interaction: CommandInteraction) {
@@ -105,6 +111,9 @@ export default {
                 break;
             case 'trade':
                 StockTrade(client, interaction);
+                break;
+            case 'leaderboard':
+                StockLeaderboard(client, interaction);
                 break;
             default:
                 // no cares

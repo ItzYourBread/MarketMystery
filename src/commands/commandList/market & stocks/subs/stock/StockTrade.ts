@@ -13,7 +13,7 @@ export async function StockTrade(
         const ticker = (interaction.data.options[0] as any).options[1].value;
         const amount = (interaction.data.options[0] as any).options[2].value;
 
-		const receiver = await client.users.get(user);
+        const receiver = await client.users.get(user);
 
         // check if receiver is a valid user
         if (!receiver) {
@@ -73,20 +73,20 @@ export async function StockTrade(
             return;
         }
 
-		const receiverProfile =
+        const receiverProfile =
             (await Profile.findOne({ id: receiver.id })) ||
             new Profile({ id: receiver.id });
 
         let newSenderShares = senderProfile.stock[ticker].shares - amount;
         let newReceiverShares = receiverProfile.stock[ticker].shares + amount;
 
-		// update sender and receiver shares
+        // update sender and receiver shares
         senderProfile.stock[ticker].shares -= amount;
         senderProfile.save();
-		
+
         receiverProfile.stock[ticker].shares += amount;
         receiverProfile.save();
-		
+
         // send success message
         let success = {
             color: Number(config.colour.primary),

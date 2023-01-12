@@ -6,6 +6,7 @@ var StockView_1 = require("./subs/stock/StockView");
 var StockBuy_1 = require("./subs/stock/StockBuy");
 var StockSell_1 = require("./subs/stock/StockSell");
 var StockTrade_1 = require("./subs/stock/StockTrade");
+var StockLeaderboard_1 = require("./subs/stock/StockLeaderboard");
 var stocks_json_1 = require("../../../json/stocks.json");
 exports.default = {
     data: {
@@ -92,6 +93,11 @@ exports.default = {
                     },
                 ],
             },
+            {
+                name: 'leaderboard',
+                type: eris_1.Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Leaderboard of the stock market',
+            },
         ],
     },
     execute: function (client, interaction) {
@@ -109,6 +115,9 @@ exports.default = {
                         break;
                     case 'trade':
                         (0, StockTrade_1.StockTrade)(client, interaction);
+                        break;
+                    case 'leaderboard':
+                        (0, StockLeaderboard_1.StockLeaderboard)(client, interaction);
                         break;
                     default:
                         break;
