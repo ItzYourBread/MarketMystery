@@ -11,7 +11,7 @@ function StockLeaderboard(client, interaction) {
         return tslib_1.__generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
-                    _c.trys.push([0, 5, , 7]);
+                    _c.trys.push([0, 9, , 11]);
                     return [4, interaction.defer()];
                 case 1:
                     _c.sent();
@@ -42,13 +42,22 @@ function StockLeaderboard(client, interaction) {
                     });
                     topUsers = sortedUsers.slice(-10);
                     list = "";
-                    for (i = 0; i < topUsers.length; i++) {
-                        user = client.users.get(topUsers[i]);
-                        if (user) {
-                            value = portfolioValues_1[topUsers[i]];
-                            list += "**".concat(i + 1, "#** ").concat(user.username, " : $").concat(value.toLocaleString(), "\n\n");
-                        }
+                    i = 0;
+                    _c.label = 4;
+                case 4:
+                    if (!(i < topUsers.length)) return [3, 7];
+                    return [4, client.getRESTUser(topUsers[i])];
+                case 5:
+                    user = _c.sent();
+                    if (user) {
+                        value = portfolioValues_1[topUsers[i]];
+                        list += "** **  **".concat(i + 1, "#** ").concat(user.username, " : $").concat(value.toLocaleString(), "\n\n");
                     }
+                    _c.label = 6;
+                case 6:
+                    i++;
+                    return [3, 4];
+                case 7:
                     embed = {
                         color: Number(config.colour.primary),
                         title: 'Stock Market Leaderboard (Global)',
@@ -59,22 +68,22 @@ function StockLeaderboard(client, interaction) {
                         timestamp: new Date(),
                     };
                     return [4, interaction.editOriginalMessage({ embeds: [embed] })];
-                case 4:
+                case 8:
                     _c.sent();
-                    return [3, 7];
-                case 5:
+                    return [3, 11];
+                case 9:
                     err_1 = _c.sent();
                     console.error(err_1);
                     return [4, interaction.editOriginalMessage({
                             content: 'Something went wrong :(',
                         })];
-                case 6:
+                case 10:
                     _c.sent();
                     setTimeout(function () {
                         interaction.deleteOriginalMessage();
                     }, 5000);
                     return [2];
-                case 7: return [2];
+                case 11: return [2];
             }
         });
     });

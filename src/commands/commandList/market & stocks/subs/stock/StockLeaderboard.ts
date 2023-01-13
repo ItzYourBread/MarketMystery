@@ -37,10 +37,10 @@ export async function StockLeaderboard(
         // Create a list of fields for the leaderboard embed
         let list: String = "";
         for (let i = 0; i < topUsers.length; i++) {
-            const user = client.users.get(topUsers[i]);
+            const user = await client.getRESTUser(topUsers[i]);
             if (user) {
                 const value = portfolioValues[topUsers[i]];
-				list += `**${i + 1}#** ${user.username} : $${value.toLocaleString()}\n\n`
+				list += `** ** \ **${i + 1}#** ${user.username} : $${value.toLocaleString()}\n\n`
             }
         }
 
