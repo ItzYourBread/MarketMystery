@@ -18,7 +18,7 @@ export async function StockLeaderboard(
         for (const profile of profiles) {
             let value = 0;
             for (const ticker of Object.keys(profile.stock)) {
-                const stock = stocks.find(s => s.ticker === ticker);
+                const stock = stocks.find((s) => s.ticker === ticker);
                 if (stock) {
                     value += profile.stock[ticker].shares * stock.price;
                 }
@@ -35,12 +35,14 @@ export async function StockLeaderboard(
         const topUsers = sortedUsers.slice(-10);
 
         // Create a list of fields for the leaderboard embed
-        let list: String = "";
+        let list: String = '';
         for (let i = 0; i < topUsers.length; i++) {
             const user = await client.getRESTUser(topUsers[i]);
             if (user) {
                 const value = portfolioValues[topUsers[i]];
-				list += `** ** \ **${i + 1}#** ${user.username} : $${value.toLocaleString()}\n\n`
+                list += `** ** \ **${i + 1}#** ${
+                    user.username
+                } : $${value.toLocaleString()}\n\n`;
             }
         }
 
@@ -48,7 +50,7 @@ export async function StockLeaderboard(
         let embed = {
             color: Number(config.colour.primary),
             title: 'Stock Market Leaderboard (Global)',
-			description: `${list}`,
+            description: `${list}`,
             footer: {
                 text: 'Stock Market',
             },

@@ -41,7 +41,7 @@ function StockLeaderboard(client, interaction) {
                         return portfolioValues_1[b] - portfolioValues_1[a];
                     });
                     topUsers = sortedUsers.slice(-10);
-                    list = "";
+                    list = '';
                     i = 0;
                     _c.label = 4;
                 case 4:

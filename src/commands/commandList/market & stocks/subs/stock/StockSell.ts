@@ -3,23 +3,6 @@ import { Stock } from '../../../../../database/stock';
 import { Profile } from '../../../../../database/profile';
 import * as config from '../../../../../config.json';
 
-function decreasedPercentage(currentPrice: number, shares: number) {
-    const sellPrice = currentPrice * shares;
-    let decreasePercentage = 0;
-
-    if (sellPrice > 100000) {
-        decreasePercentage = 0.1;
-    } else if (sellPrice > 50000) {
-        decreasePercentage = 0.06;
-    } else if (sellPrice > 10000) {
-        decreasePercentage = 0.03;
-    } else {
-        decreasePercentage = 0.01;
-    }
-
-    return sellPrice - sellPrice * decreasePercentage;
-}
-
 export async function StockSell(
     client: Client,
     interaction: CommandInteraction
@@ -37,12 +20,26 @@ export async function StockSell(
         if (Data.stock[ticker].shares < amount) {
             const insufficientShares = {
                 color: Number(config.colour.danger),
-                description: `You don't have enough shares of **${ticker}** to sell. Please try again with a lower amount.`,
+                title: 'Insufficient Shares',
+                description: `You attempted to sell ${amount} shares of **${ticker}**, but you only own ${Data.stock[ticker].shares} shares. Please try again with a lower amount.`,
+                fields: [
+                    {
+                        name: 'Total Shares Owned',
+                        value: Data.stock[ticker].shares,
+                        inline: true,
+                    },
+                    {
+                        name: 'Attempted Sale',
+                        value: `${amount} shares of ${ticker}`,
+                        inline: true,
+                    },
+                ],
+                timestamp: new Date(),
                 footer: {
                     text: 'Stock Sell Cancelled',
                 },
-                timestamp: new Date(),
             };
+
             await interaction.editOriginalMessage({
                 embeds: [insufficientShares],
             });
@@ -52,26 +49,40 @@ export async function StockSell(
             return;
         }
 
-        const sellPrice = stock.price;
-        const dropPercent = decreasedPercentage(sellPrice, amount);
-
+        const sellPrice = stock.price * amount;
         Data.cash += sellPrice;
         Data.stock[ticker].shares -= amount;
         Data.save();
 
+        const drop = stock.price * 0.0001 * amount;
         stock.shares += amount;
-        stock.price -= dropPercent;
+        stock.price = drop;
         stock.save();
 
         const success = {
             color: Number(config.colour.primary),
             title: 'Stock Sell Successful',
-            description: `You have successfully sold \`${amount.toLocaleString()}\` shares of **${ticker}** for a total of \`$${sellPrice.toLocaleString()}\`.`,
+            description: `You have successfully sold ${amount.toLocaleString()} shares of ${ticker} for a total of $${sellPrice.toLocaleString()}.`,
+            fields: [
+                {
+                    name: 'Shares Sold',
+                    value: amount.toLocaleString(),
+                },
+                {
+                    name: 'Sell Price',
+                    value: `$${sellPrice.toLocaleString()}`,
+                },
+                {
+                    name: 'Stock Price Changes',
+                    value: `-$${drop.toLocaleString()}`,
+                },
+            ],
             footer: {
                 text: 'Stock Sell Success',
             },
             timestamp: new Date(),
         };
+
         await interaction.editOriginalMessage({ embeds: [success] });
     } catch (err) {
         console.error(err);
@@ -81,6 +92,5 @@ export async function StockSell(
         setTimeout(() => {
             interaction.deleteOriginalMessage();
         }, 5000);
-        return;
     }
 }
