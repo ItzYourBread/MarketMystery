@@ -19,7 +19,7 @@ exports.default = {
     },
     execute: function (client, interaction) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var ids, user, Data, networth, balance, err_1;
+            var ids, user, Data, balance, err_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -35,7 +35,6 @@ exports.default = {
                     case 2:
                         Data = (_a.sent()) ||
                             new profile_1.Profile({ id: user.id });
-                        networth = Data.cash + Data.bank.cash;
                         balance = {
                             title: "".concat(user.username, "'s Balance"),
                             color: Number(config.colour.primary),
@@ -45,21 +44,14 @@ exports.default = {
                         if (Data.cash > 1) {
                             balance.fields.push({
                                 name: "Cash:",
-                                value: "`".concat(Data.cash.toLocaleString(), "` "),
+                                value: "`$".concat(Data.cash.toLocaleString(), "` "),
                                 inline: false,
                             });
                         }
                         if (Data.bank.stats && Data.bank.cash > 1) {
                             balance.fields.push({
                                 name: "Bank:",
-                                value: "`".concat(Data.bank.cash.toLocaleString(), "` "),
-                                inline: false
-                            });
-                        }
-                        if (networth > 1) {
-                            balance.fields.push({
-                                name: "bank:",
-                                value: "`".concat(networth.toLocaleString(), "` "),
+                                value: "`$".concat(Data.bank.cash.toLocaleString(), "` "),
                                 inline: false
                             });
                         }

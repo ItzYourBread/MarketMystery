@@ -27,8 +27,6 @@ export default {
                 (await Profile.findOne({ id: user.id })) ||
                 new Profile({ id: user.id });
 
-			const networth = Data.cash + Data.bank.cash;
-
 			let balance = {
 				title: `${user.username}'s Balance`,
 				color: Number(config.colour.primary),
@@ -39,7 +37,7 @@ export default {
 			if (Data.cash > 1) {
 				balance.fields.push({
 					name: "Cash:",
-					value: `\`${Data.cash.toLocaleString()}\` `,
+					value: `\`$${Data.cash.toLocaleString()}\` `,
 					inline: false,
 				})
 			}
@@ -47,15 +45,7 @@ export default {
 			if (Data.bank.stats && Data.bank.cash > 1) {
 				balance.fields.push({
 					name: "Bank:",
-					value: `\`${Data.bank.cash.toLocaleString()}\` `,
-					inline: false
-				})
-			}
-
-			if (networth > 1) {
-				balance.fields.push({
-					name: "bank:",
-					value: `\`${networth.toLocaleString()}\` `,
+					value: `\`$${Data.bank.cash.toLocaleString()}\` `,
 					inline: false
 				})
 			}
