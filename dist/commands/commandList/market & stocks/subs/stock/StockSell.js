@@ -63,7 +63,7 @@ function StockSell(client, interaction) {
                     Data.save();
                     drop = stock.price * 0.0001 * amount;
                     stock.shares += amount;
-                    stock.price = drop;
+                    stock.price -= drop;
                     stock.save();
                     success = {
                         color: Number(config.colour.primary),

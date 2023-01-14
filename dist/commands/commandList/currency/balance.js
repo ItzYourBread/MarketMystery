@@ -19,7 +19,7 @@ exports.default = {
     },
     execute: function (client, interaction) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var ids, user, Data, load, balance, err_1;
+            var ids, user, Data, networth, balance, err_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -35,16 +35,34 @@ exports.default = {
                     case 2:
                         Data = (_a.sent()) ||
                             new profile_1.Profile({ id: user.id });
-                        load = "Here is your currency balance `$".concat(Data.cash.toLocaleString(), "`");
-                        if (Data.bank.stats && Data.bank.cash >= 1) {
-                            load += "\n**Bank:** `$".concat(Data.bank.cash.toLocaleString(), "`");
-                        }
+                        networth = Data.cash + Data.bank.cash;
                         balance = {
                             title: "".concat(user.username, "'s Balance"),
                             color: Number(config.colour.primary),
-                            description: load,
-                            timestamp: new Date(),
+                            fields: [],
+                            timestamp: new Date
                         };
+                        if (Data.cash > 1) {
+                            balance.fields.push({
+                                name: "Cash:",
+                                value: "`".concat(Data.cash.toLocaleString(), "` "),
+                                inline: false,
+                            });
+                        }
+                        if (Data.bank.stats && Data.bank.cash > 1) {
+                            balance.fields.push({
+                                name: "Bank:",
+                                value: "`".concat(Data.bank.cash.toLocaleString(), "` "),
+                                inline: false
+                            });
+                        }
+                        if (networth > 1) {
+                            balance.fields.push({
+                                name: "bank:",
+                                value: "`".concat(networth.toLocaleString(), "` "),
+                                inline: false
+                            });
+                        }
                         return [4, interaction.editOriginalMessage({ embeds: [balance] })];
                     case 3:
                         _a.sent();

@@ -1,0 +1,24 @@
+import { Constants, Client, CommandInteraction } from 'eris';
+import { HelpCommands } from "./subs/help/HelpCommands"
+
+export default {
+    data: {
+        name: 'help',
+        description: 'Get help!',
+        usage: '/help <subcommand>',
+        options: [
+            {
+                name: 'commands',
+                type: Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Get list of commands',
+            },
+            {
+                name: 'info',
+                type: Constants.ApplicationCommandOptionTypes.SUB_COMMAND,
+                description: 'Get some info & about',
+            },
+        ],
+    },
+    async execute(client: Client, interaction: CommandInteraction) {
+    },
+};
