@@ -12,8 +12,7 @@ function trend(ticker) {
         var response, data;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.253:".concat(process.env.PORT, "/stock/").concat(ticker) +
-                        process.env.API_KEY)];
+                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.253:".concat(process.env.PORT, "/api/stock/").concat(ticker))];
                 case 1:
                     response = _a.sent();
                     return [4, response.json()];
@@ -27,7 +26,7 @@ function trend(ticker) {
 }
 function StockView(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, ticker, stock, data, _a, err_1;
+        var ticker, stock, data, _a, err_1;
         var _b, _c;
         return tslib_1.__generator(this, function (_d) {
             switch (_d.label) {
@@ -36,7 +35,6 @@ function StockView(client, interaction) {
                     return [4, interaction.defer()];
                 case 1:
                     _d.sent();
-                    user = interaction.member;
                     ticker = interaction.data.options[0].options[0].value;
                     return [4, stock_1.Stock.findOne({ ticker: ticker })];
                 case 2:

@@ -7,8 +7,7 @@ import 'dotenv/config';
 
 async function trend(ticker: String) {
     const response = await fetch(
-        `http://103.60.13.253:${process.env.PORT}/stock/${ticker}` +
-            process.env.API_KEY
+        `http://103.60.13.253:${process.env.PORT}/api/stock/${ticker}`
     );
     const data = await response.json();
     return await Trend(data);
@@ -20,7 +19,6 @@ export async function StockView(
 ) {
     try {
         await interaction.defer();
-        const user = interaction.member;
         const ticker = (interaction.data.options[0] as any).options[0].value;
         const stock = await Stock.findOne({ ticker: ticker });
 
