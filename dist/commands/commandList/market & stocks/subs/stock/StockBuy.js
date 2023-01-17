@@ -7,7 +7,7 @@ var profile_1 = require("../../../../../database/profile");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
 function StockBuy(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, ticker, amount, stock, Data, notenough, cost, notenough, totalCost, totalShares, success, err_1;
+        var user, ticker, amount, stock, Data, notenough, cost, notenough, totalCost, totalShares, success, up, err_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -102,8 +102,9 @@ function StockBuy(client, interaction) {
                     Data.cash -= cost;
                     Data.stock[ticker].shares += amount;
                     Data.save();
+                    up = stock.price * 0.08 * amount;
                     stock.shares -= amount;
-                    stock.price += cost;
+                    stock.price += up;
                     stock.save();
                     return [4, interaction.editOriginalMessage({ embeds: [success] })];
                 case 8:

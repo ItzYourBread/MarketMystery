@@ -1,4 +1,5 @@
 import { Stock } from '../database/stock';
+import { RandomNumber } from "stubby.ts"
 import ms from 'ms';
 import chalk from 'chalk';
 
@@ -9,12 +10,12 @@ export async function StockUpdate(ticker: String) {
 
         if (Math.random() < 0.5) {
             // Increase price by a random amount between 1% and 10%
-            const increaseAmount = Math.random() * 0.1 + 0.01;
-            newPrice = stock.price * (1 + increaseAmount);
+            const increaseAmount = RandomNumber(50, 15000);
+            newPrice = stock.price + increaseAmount;
         } else {
             // Decrease price by a random amount between 1% and 10%
-            const decreaseAmount = Math.random() * 0.1 + 0.01;
-            newPrice = stock.price * (1 - decreaseAmount);
+            const decreaseAmount = RandomNumber(250, 30000);
+            newPrice = stock.price + decreaseAmount;
         }
 
         stock.history.push({

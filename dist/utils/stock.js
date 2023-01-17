@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StockUpdate = void 0;
 var tslib_1 = require("tslib");
 var stock_1 = require("../database/stock");
+var stubby_ts_1 = require("stubby.ts");
 var ms_1 = tslib_1.__importDefault(require("ms"));
 var chalk_1 = tslib_1.__importDefault(require("chalk"));
 function StockUpdate(ticker) {
@@ -17,12 +18,12 @@ function StockUpdate(ticker) {
                         case 1:
                             stock = _a.sent();
                             if (Math.random() < 0.5) {
-                                increaseAmount = Math.random() * 0.1 + 0.01;
-                                newPrice = stock.price * (1 + increaseAmount);
+                                increaseAmount = (0, stubby_ts_1.RandomNumber)(50, 15000);
+                                newPrice = stock.price + increaseAmount;
                             }
                             else {
-                                decreaseAmount = Math.random() * 0.1 + 0.01;
-                                newPrice = stock.price * (1 - decreaseAmount);
+                                decreaseAmount = (0, stubby_ts_1.RandomNumber)(250, 30000);
+                                newPrice = stock.price + decreaseAmount;
                             }
                             stock.history.push({
                                 time: Number(new Date()),

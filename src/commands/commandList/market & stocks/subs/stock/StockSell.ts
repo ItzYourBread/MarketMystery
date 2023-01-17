@@ -54,7 +54,7 @@ export async function StockSell(
         Data.stock[ticker].shares -= amount;
         Data.save();
 
-        const drop = stock.price * 0.0001 * amount;
+        const drop = stock.price * 0.03 * amount;
         stock.shares += amount;
         stock.price -= drop;
         stock.save();

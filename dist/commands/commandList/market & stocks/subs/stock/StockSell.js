@@ -61,7 +61,7 @@ function StockSell(client, interaction) {
                     Data.cash += sellPrice;
                     Data.stock[ticker].shares -= amount;
                     Data.save();
-                    drop = stock.price * 0.0001 * amount;
+                    drop = stock.price * 0.03 * amount;
                     stock.shares += amount;
                     stock.price -= drop;
                     stock.save();
