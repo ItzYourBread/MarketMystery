@@ -23,16 +23,6 @@ export default {
                 type: Constants.ApplicationCommandOptionTypes.STRING,
                 description: 'industry type please',
                 required: true,
-                choices: [
-                    {
-                        name: 'Technology',
-                        value: 'Technology',
-                    },
-                    {
-                        name: 'Software Development',
-                        value: 'Software Development',
-                    },
-                ],
             },
             {
                 name: 'price',

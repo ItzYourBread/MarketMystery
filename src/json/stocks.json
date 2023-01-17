@@ -4,9 +4,21 @@
             "name": "SKYT (SkyTech)",
             "value": "SKYT"
         },
+		{
+			"name": "MLWT (WaltMalt)",
+			"value": "WLMT"
+		},
         {
-            "name": "GKYN (GeekyOrion)",
-            "value": "GKYN"
-        }
+            "name": "ENRG (EnergyWorks)",
+            "value": "ENRG"
+		},
+		{
+			"name": "FINC (FinanceCorp)",
+			"value": "FINC"
+		},
+		{
+			"name": "REAL (Realty Investments)",
+			"value": "REAL"
+		}
     ]
 }
