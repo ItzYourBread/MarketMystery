@@ -11,20 +11,19 @@ function StockUpdate(ticker) {
         var _this = this;
         return tslib_1.__generator(this, function (_a) {
             setInterval(function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                var stock, newPrice, increaseAmount, decreaseAmount;
+                var stock, newPrice, volatility, change;
                 return tslib_1.__generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, stock_1.Stock.findOne({ ticker: ticker })];
                         case 1:
                             stock = _a.sent();
-                            if (Math.random() < 0.5) {
-                                increaseAmount = (0, stubby_ts_1.RandomNumber)(50, 15000);
-                                newPrice = stock.price + increaseAmount;
+                            if (!stock) {
+                                console.log("No stock found with ticker ".concat(ticker));
+                                return [2];
                             }
-                            else {
-                                decreaseAmount = (0, stubby_ts_1.RandomNumber)(250, 30000);
-                                newPrice = stock.price + decreaseAmount;
-                            }
+                            volatility = (0, stubby_ts_1.RandomNumber)(1, 5);
+                            change = stock.price * (volatility / 100) * (Math.random() > 0.5 ? 1 : -1);
+                            newPrice = stock.price + change;
                             stock.history.push({
                                 time: Number(new Date()),
                                 price: newPrice,
@@ -38,7 +37,7 @@ function StockUpdate(ticker) {
                             return [2];
                     }
                 });
-            }); }, (0, ms_1.default)('30m'));
+            }); }, (0, ms_1.default)('15m'));
             console.log(chalk_1.default.magentaBright("[Stock Updater] ".concat(ticker, " Activated!")));
             return [2];
         });

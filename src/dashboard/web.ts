@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import chalk from 'chalk';
-import { Stock } from "../database/stock"
+import { Stock } from '../database/stock';
 import 'dotenv/config';
 
 const app = express();
@@ -16,7 +16,6 @@ app.get('/', async (req: Request, res: Response) => {
 app.get('/tos', async (req: Request, res: Response) => {
     res.render('tos');
 });
-
 
 app.get('/api/stock/:ticker', async (req: Request, res: Response) => {
     const ticker = req.params.ticker;
