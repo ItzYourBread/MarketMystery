@@ -12,7 +12,8 @@ function trend(ticker) {
         var response, data;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.253:".concat(process.env.PORT, "/stock/").concat(ticker) + process.env.API_KEY)];
+                case 0: return [4, (0, node_fetch_1.default)("http://103.60.13.253:".concat(process.env.PORT, "/stock/").concat(ticker) +
+                        process.env.API_KEY)];
                 case 1:
                     response = _a.sent();
                     return [4, response.json()];

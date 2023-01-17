@@ -1,2 +1,2 @@
 import 'dotenv/config';
-import './api';
+import './dashboard/web';

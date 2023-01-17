@@ -27,28 +27,28 @@ export default {
                 (await Profile.findOne({ id: user.id })) ||
                 new Profile({ id: user.id });
 
-			let balance = {
-				title: `${user.username}'s Balance`,
-				color: Number(config.colour.primary),
-				fields: [],
-				timestamp: new Date
-			};
+            let balance = {
+                title: `${user.username}'s Balance`,
+                color: Number(config.colour.primary),
+                fields: [],
+                timestamp: new Date(),
+            };
 
-			if (Data.cash > 1) {
-				balance.fields.push({
-					name: "Cash:",
-					value: `\`$${Data.cash.toLocaleString()}\` `,
-					inline: false,
-				})
-			}
+            if (Data.cash > 1) {
+                balance.fields.push({
+                    name: 'Cash:',
+                    value: `\`$${Data.cash.toLocaleString()}\` `,
+                    inline: false,
+                });
+            }
 
-			if (Data.bank.stats && Data.bank.cash > 1) {
-				balance.fields.push({
-					name: "Bank:",
-					value: `\`$${Data.bank.cash.toLocaleString()}\` `,
-					inline: false
-				})
-			}
+            if (Data.bank.stats && Data.bank.cash > 1) {
+                balance.fields.push({
+                    name: 'Bank:',
+                    value: `\`$${Data.bank.cash.toLocaleString()}\` `,
+                    inline: false,
+                });
+            }
 
             await interaction.editOriginalMessage({ embeds: [balance] });
         } catch (err) {

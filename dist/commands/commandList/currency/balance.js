@@ -39,20 +39,20 @@ exports.default = {
                             title: "".concat(user.username, "'s Balance"),
                             color: Number(config.colour.primary),
                             fields: [],
-                            timestamp: new Date
+                            timestamp: new Date(),
                         };
                         if (Data.cash > 1) {
                             balance.fields.push({
-                                name: "Cash:",
+                                name: 'Cash:',
                                 value: "`$".concat(Data.cash.toLocaleString(), "` "),
                                 inline: false,
                             });
                         }
                         if (Data.bank.stats && Data.bank.cash > 1) {
                             balance.fields.push({
-                                name: "Bank:",
+                                name: 'Bank:',
                                 value: "`$".concat(Data.bank.cash.toLocaleString(), "` "),
-                                inline: false
+                                inline: false,
                             });
                         }
                         return [4, interaction.editOriginalMessage({ embeds: [balance] })];
