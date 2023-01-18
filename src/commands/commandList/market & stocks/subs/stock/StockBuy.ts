@@ -80,7 +80,7 @@ export async function StockBuy(
         let success = {
             title: `Purchase Successful!`,
             color: Number(config.colour.primary),
-            description: `Congratulations on your successful purchase of ${amount.toLocaleString()} shares in ${
+            description: `Congratulations on your successful purchase of \`${amount.toLocaleString()}\` shares in ${
                 stock.company
             } (${ticker}). Your portfolio has been updated to reflect your new ownership of these shares. Keep an eye on the market to see how your investment performs, and consider buying or selling at the right times to maximize your profits.`,
             fields: [
@@ -105,9 +105,7 @@ export async function StockBuy(
         Data.stock[ticker].shares += amount;
         Data.save();
 
-        const up = stock.price * 0.08 * amount;
         stock.shares -= amount;
-        stock.price += up;
         stock.save();
 
         await interaction.editOriginalMessage({ embeds: [success] });

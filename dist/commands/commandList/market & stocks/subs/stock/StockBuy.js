@@ -7,7 +7,7 @@ var profile_1 = require("../../../../../database/profile");
 var config = tslib_1.__importStar(require("../../../../../config.json"));
 function StockBuy(client, interaction) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var user, ticker, amount, stock, Data, notenough, cost, notenough, totalCost, totalShares, success, up, err_1;
+        var user, ticker, amount, stock, Data, notenough, cost, notenough, totalCost, totalShares, success, err_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -81,7 +81,7 @@ function StockBuy(client, interaction) {
                     success = {
                         title: "Purchase Successful!",
                         color: Number(config.colour.primary),
-                        description: "Congratulations on your successful purchase of ".concat(amount.toLocaleString(), " shares in ").concat(stock.company, " (").concat(ticker, "). Your portfolio has been updated to reflect your new ownership of these shares. Keep an eye on the market to see how your investment performs, and consider buying or selling at the right times to maximize your profits."),
+                        description: "Congratulations on your successful purchase of `".concat(amount.toLocaleString(), "` shares in ").concat(stock.company, " (").concat(ticker, "). Your portfolio has been updated to reflect your new ownership of these shares. Keep an eye on the market to see how your investment performs, and consider buying or selling at the right times to maximize your profits."),
                         fields: [
                             {
                                 name: 'Total Cost',
@@ -102,9 +102,7 @@ function StockBuy(client, interaction) {
                     Data.cash -= cost;
                     Data.stock[ticker].shares += amount;
                     Data.save();
-                    up = stock.price * 0.08 * amount;
                     stock.shares -= amount;
-                    stock.price += up;
                     stock.save();
                     return [4, interaction.editOriginalMessage({ embeds: [success] })];
                 case 8:

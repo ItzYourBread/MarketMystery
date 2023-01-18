@@ -21,16 +21,16 @@ export async function StockSell(
             const insufficientShares = {
                 color: Number(config.colour.danger),
                 title: 'Insufficient Shares',
-                description: `You attempted to sell ${amount} shares of **${ticker}**, but you only own ${Data.stock[ticker].shares} shares. Please try again with a lower amount.`,
+                description: `You attempted to sell \`${amount.toLocaleString()}\` shares of **${ticker}**, but you only own \`${Data.stock[ticker].shares.toLocaleString()}\` shares. Please try again with a lower amount.`,
                 fields: [
                     {
                         name: 'Total Shares Owned',
-                        value: Data.stock[ticker].shares,
+                        value: `\`${Data.stock[ticker].shares.toLocaleString()}\` `,
                         inline: true,
                     },
                     {
                         name: 'Attempted Sale',
-                        value: `${amount} shares of ${ticker}`,
+                        value: `\`${amount.toLocaleString()}\` shares of ${ticker}`,
                         inline: true,
                     },
                 ],
@@ -54,28 +54,22 @@ export async function StockSell(
         Data.stock[ticker].shares -= amount;
         Data.save();
 
-        const drop = stock.price * 0.03 * amount;
         stock.shares += amount;
-        stock.price -= drop;
         stock.save();
 
         const success = {
             color: Number(config.colour.primary),
             title: 'Stock Sell Successful',
-            description: `You have successfully sold ${amount.toLocaleString()} shares of ${ticker} for a total of $${sellPrice.toLocaleString()}.`,
+            description: `You have successfully sold \`${amount.toLocaleString()}\` shares of ${ticker} for a total of \`$${sellPrice.toLocaleString()}\`. `,
             fields: [
                 {
                     name: 'Shares Sold',
                     value: amount.toLocaleString(),
                 },
                 {
-                    name: 'Sell Price',
-                    value: `$${sellPrice.toLocaleString()}`,
-                },
-                {
-                    name: 'Stock Price Changes',
-                    value: `-$${drop.toLocaleString()}`,
-                },
+                    name: 'Sold Price',
+                    value: `\`$${sellPrice.toLocaleString()}\` `,
+                }
             ],
             footer: {
                 text: 'Stock Sell Success',
