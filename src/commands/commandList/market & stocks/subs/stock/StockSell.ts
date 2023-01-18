@@ -21,11 +21,15 @@ export async function StockSell(
             const insufficientShares = {
                 color: Number(config.colour.danger),
                 title: 'Insufficient Shares',
-                description: `You attempted to sell \`${amount.toLocaleString()}\` shares of **${ticker}**, but you only own \`${Data.stock[ticker].shares.toLocaleString()}\` shares. Please try again with a lower amount.`,
+                description: `You attempted to sell \`${amount.toLocaleString()}\` shares of **${ticker}**, but you only own \`${Data.stock[
+                    ticker
+                ].shares.toLocaleString()}\` shares. Please try again with a lower amount.`,
                 fields: [
                     {
                         name: 'Total Shares Owned',
-                        value: `\`${Data.stock[ticker].shares.toLocaleString()}\` `,
+                        value: `\`${Data.stock[
+                            ticker
+                        ].shares.toLocaleString()}\` `,
                         inline: true,
                     },
                     {
@@ -69,7 +73,7 @@ export async function StockSell(
                 {
                     name: 'Sold Price',
                     value: `\`$${sellPrice.toLocaleString()}\` `,
-                }
+                },
             ],
             footer: {
                 text: 'Stock Sell Success',

@@ -19,15 +19,15 @@ const profile: Schema = new Schema({
         ENRG: {
             shares: { type: Number, default: 0 },
         },
-		FINC: {
-			shares: { type: Number, default: 0 }
-		},
-		REAL: {
-			shares: { type: Number, default: 0 }
-		},
-		WLMT: {
-			shares: { type: Number, default: 0 }
-		}
+        FINC: {
+            shares: { type: Number, default: 0 },
+        },
+        REAL: {
+            shares: { type: Number, default: 0 },
+        },
+        WLMT: {
+            shares: { type: Number, default: 0 },
+        },
     },
 });
 
