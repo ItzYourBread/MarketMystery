@@ -22,14 +22,14 @@ var profile = new mongoose_1.Schema({
             shares: { type: Number, default: 0 },
         },
         FINC: {
-            shares: { type: Number, default: 0 }
+            shares: { type: Number, default: 0 },
         },
         REAL: {
-            shares: { type: Number, default: 0 }
+            shares: { type: Number, default: 0 },
         },
         WLMT: {
-            shares: { type: Number, default: 0 }
-        }
+            shares: { type: Number, default: 0 },
+        },
     },
 });
 var Profile = mongoose_1.default.model('profile', profile);

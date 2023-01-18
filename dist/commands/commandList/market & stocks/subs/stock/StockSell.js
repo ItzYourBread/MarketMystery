@@ -75,7 +75,7 @@ function StockSell(client, interaction) {
                             {
                                 name: 'Sold Price',
                                 value: "`$".concat(sellPrice.toLocaleString(), "` "),
-                            }
+                            },
                         ],
                         footer: {
                             text: 'Stock Sell Success',

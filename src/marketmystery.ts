@@ -11,7 +11,7 @@ console.log(
     )
 );
 
-import './dashboard/web';
+import './api';
 
 const client = new Client(process.env.TOKEN, {
     restMode: true,
