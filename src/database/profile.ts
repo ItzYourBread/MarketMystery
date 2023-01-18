@@ -16,9 +16,18 @@ const profile: Schema = new Schema({
         SKYT: {
             shares: { type: Number, default: 0 },
         },
-        GKYN: {
+        ENRG: {
             shares: { type: Number, default: 0 },
         },
+		FINC: {
+			shares: { type: Number, default: 0 }
+		},
+		REAL: {
+			shares: { type: Number, default: 0 }
+		},
+		WLMT: {
+			shares: { type: Number, default: 0 }
+		}
     },
 });
 
