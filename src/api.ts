@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import path from 'path';
 import chalk from 'chalk';
 import { Stock } from './database/stock';
 import 'dotenv/config';
@@ -14,6 +13,15 @@ app.get('/api/stock/:ticker', async (req: Request, res: Response) => {
         return;
     }
     res.send(stock.history);
+});
+
+app.get('/api/login', (req: Request, res: Response) => {
+  const redirectUri = 'https://vue.subsidised.repl.co/';
+  const clientId = '943855772415193118';
+  const scope = 'identify';
+  const responseType = 'code';
+  const url = `https://discord.com/oauth2/authorize?client_id=${clientId}&scope=${scope}&response_type=${responseType}&redirect_uri=${redirectUri}`;
+  res.redirect(url);
 });
 
 app.listen(process.env.PORT, () => {

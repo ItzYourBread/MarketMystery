@@ -24,6 +24,14 @@ app.get('/api/stock/:ticker', function (req, res) { return tslib_1.__awaiter(voi
         }
     });
 }); });
+app.get('/api/login', function (req, res) {
+    var redirectUri = 'https://vue.subsidised.repl.co/';
+    var clientId = '943855772415193118';
+    var scope = 'identify';
+    var responseType = 'code';
+    var url = "https://discord.com/oauth2/authorize?client_id=".concat(clientId, "&scope=").concat(scope, "&response_type=").concat(responseType, "&redirect_uri=").concat(redirectUri);
+    res.redirect(url);
+});
 app.listen(process.env.PORT, function () {
     console.log(chalk_1.default.greenBright("Server is running on port ".concat(process.env.PORT)));
 });
