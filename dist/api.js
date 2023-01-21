@@ -34,7 +34,7 @@ app.get('/api/stock/:ticker', function (req, res) { return tslib_1.__awaiter(voi
 app.get('/login', function (req, res) {
     var redirectUri = 'http://103.60.13.253:20306/callback/';
     var clientId = '943855772415193118';
-    var scope = 'identify';
+    var scope = 'identify+email';
     var responseType = 'code';
     var url = "https://discord.com/oauth2/authorize?client_id=".concat(clientId, "&scope=").concat(scope, "&response_type=").concat(responseType, "&redirect_uri=").concat(redirectUri);
     res.redirect(url);

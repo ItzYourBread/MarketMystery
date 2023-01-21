@@ -28,7 +28,7 @@ app.get('/api/stock/:ticker', async (req: Request, res: Response) => {
 app.get('/login', (req: Request, res: Response) => {
     const redirectUri = 'http://103.60.13.253:20306/callback/';
     const clientId = '943855772415193118';
-    const scope = 'identify';
+    const scope = 'identify+email';
     const responseType = 'code';
     const url = `https://discord.com/oauth2/authorize?client_id=${clientId}&scope=${scope}&response_type=${responseType}&redirect_uri=${redirectUri}`;
     res.redirect(url);
