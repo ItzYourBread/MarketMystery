@@ -35,13 +35,15 @@ app.get('/login', (req: Request, res: Response) => {
 });
 
 app.get('/callback', async (req: Request, res: Response) => {
-    const code = req.query.code;
+    const code = req.query.code || null;
     const redirectUri = 'http://103.60.13.253:20306/callback/';
     const clientId = '943855772415193118';
     const clientSecret = '7gTEzqCK7zyNQprLcJhowsIhLYaE8jaF';
     const url = `https://discord.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`;
 
     const response = await fetch(url, { method: 'POST' });
+	console.log(response)
+	
     if (!response.ok) {
         res.status(response.status).send(`Error: ${response.statusText}`);
         return;

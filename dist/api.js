@@ -44,7 +44,7 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                code = req.query.code;
+                code = req.query.code || null;
                 redirectUri = 'http://103.60.13.253:20306/callback/';
                 clientId = '943855772415193118';
                 clientSecret = '7gTEzqCK7zyNQprLcJhowsIhLYaE8jaF';
@@ -52,6 +52,7 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
                 return [4, (0, node_fetch_1.default)(url, { method: 'POST' })];
             case 1:
                 response = _a.sent();
+                console.log(response);
                 if (!response.ok) {
                     res.status(response.status).send("Error: ".concat(response.statusText));
                     return [2];
