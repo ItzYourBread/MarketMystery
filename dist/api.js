@@ -40,34 +40,40 @@ app.get('/login', function (req, res) {
     res.redirect(url);
 });
 app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-    var code, redirectUri, clientId, clientSecret, url, response, json;
+    var code, redirectUri, clientId, clientSecret, url, response, json, err_1;
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                code = req.query.code || null;
+                code = req.query.code;
                 redirectUri = 'http://103.60.13.253:20306/callback/';
                 clientId = '943855772415193118';
-                clientSecret = '7gTEzqCK7zyNQprLcJhowsIhLYaE8jaF';
+                clientSecret = 'GJ7NGk8AoTBZZda_dfZUH9N0Ep6ZtUjs';
                 url = "https://discord.com/api/oauth2/token?grant_type=authorization_code&code=".concat(code, "&redirect_uri=").concat(redirectUri, "&client_id=").concat(clientId, "&client_secret=").concat(clientSecret);
-                return [4, (0, node_fetch_1.default)(url, { method: 'POST' })];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 4, , 5]);
+                return [4, (0, node_fetch_1.default)(url, { method: 'POST' })];
+            case 2:
                 response = _a.sent();
-                console.log(response);
                 if (!response.ok) {
-                    res.status(response.status).send("Error: ".concat(response.statusText));
-                    return [2];
+                    throw new Error("Error: ".concat(response.statusText));
                 }
                 return [4, response.json()];
-            case 2:
+            case 3:
                 json = _a.sent();
                 if (!json.access_token) {
-                    res.status(400).send('Error: Missing access_token');
-                    return [2];
+                    throw new Error('Error: Missing access_token');
                 }
                 req.session['access_token'] = json.access_token;
                 req.session.save();
                 res.redirect("https://vue.subsidised.repl.co/");
-                return [2];
+                return [3, 5];
+            case 4:
+                err_1 = _a.sent();
+                console.error(err_1);
+                res.status(500).send(err_1.message);
+                return [3, 5];
+            case 5: return [2];
         }
     });
 }); });
