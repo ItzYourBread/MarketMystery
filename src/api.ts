@@ -44,13 +44,11 @@ app.get('/callback', async (req: Request, res: Response) => {
     const response = await fetch(url, { method: 'POST' });
     if (!response.ok) {
         res.status(response.status).send(`Error: ${response.statusText}`);
-		console.error(`Error: ${response.statusText}`)
         return;
     }
     const json = await response.json();
     if (!json.access_token) {
         res.status(400).send('Error: Missing access_token');
-		console.error("Error: Missing access_token")
         return;
     }
     req.session['access_token'] = json.access_token;

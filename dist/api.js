@@ -54,7 +54,6 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
                 response = _a.sent();
                 if (!response.ok) {
                     res.status(response.status).send("Error: ".concat(response.statusText));
-                    console.error("Error: ".concat(response.statusText));
                     return [2];
                 }
                 return [4, response.json()];
@@ -62,7 +61,6 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
                 json = _a.sent();
                 if (!json.access_token) {
                     res.status(400).send('Error: Missing access_token');
-                    console.error("Error: Missing access_token");
                     return [2];
                 }
                 req.session['access_token'] = json.access_token;
