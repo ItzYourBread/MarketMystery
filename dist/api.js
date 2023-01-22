@@ -8,11 +8,7 @@ require("dotenv/config");
 var express_session_1 = tslib_1.__importDefault(require("express-session"));
 var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
 var app = (0, express_1.default)();
-app.use((0, express_session_1.default)({
-    secret: 'wishd827sjusbdlcjsbsisbs829jsjsbduwbz',
-    resave: false,
-    saveUninitialized: true,
-}));
+app.use((0, express_session_1.default)({ secret: 'SuckMeUpPlease', cookie: {} }));
 app.get('/api/stock/:ticker', function (req, res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var ticker, stock;
     return tslib_1.__generator(this, function (_a) {
@@ -44,34 +40,37 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                code = req.query.code;
+                code = req.query.code || null;
                 redirectUri = 'http://103.60.13.253:20306/callback/';
                 clientId = '943855772415193118';
                 clientSecret = 'GJ7NGk8AoTBZZda_dfZUH9N0Ep6ZtUjs';
-                url = "https://discord.com/api/oauth2/token?grant_type=authorization_code&code=".concat(code, "&redirect_uri=").concat(redirectUri, "&client_id=").concat(clientId, "&client_secret=").concat(clientSecret);
+                url = "https://discord.com/api/oauth2/token";
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 4, , 5]);
                 return [4, (0, node_fetch_1.default)(url, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
+                            'Content-type': 'application/x-www-form-urlencoded',
+                        },
+                        body: "client_id=".concat(clientId, "&client_secret=").concat(clientSecret, "&grant_type=authorization_code&code=").concat(code, "&redirect_uri=").concat(redirectUri),
                     })];
             case 2:
                 response = _a.sent();
                 if (!response.ok) {
                     console.log("Error: ".concat(response.statusText));
+                    return [2];
                 }
                 return [4, response.json()];
             case 3:
                 json = _a.sent();
                 if (!json.access_token) {
                     console.log('Error: Missing access_token');
+                    return [2];
                 }
                 req.session['access_token'] = json.access_token;
                 req.session.save();
-                res.redirect("https://vue.subsidised.repl.co/");
+                res.redirect('https://vue.subsidised.repl.co/');
                 return [3, 5];
             case 4:
                 err_1 = _a.sent();

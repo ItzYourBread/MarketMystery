@@ -6,14 +6,8 @@ import session from 'express-session';
 import fetch from 'node-fetch';
 
 const app = express();
+app.use(session({ secret: 'SuckMeUpPlease', cookie: {} }))
 
-app.use(
-    session({
-        secret: 'wishd827sjusbdlcjsbsisbs829jsjsbduwbz',
-        resave: false,
-        saveUninitialized: true,
-    })
-);
 
 app.get('/api/stock/:ticker', async (req: Request, res: Response) => {
     const ticker = req.params.ticker;
@@ -35,29 +29,32 @@ app.get('/login', (req: Request, res: Response) => {
 });
 
 app.get('/callback', async (req: Request, res: Response) => {
-    const code = req.query.code;
+    const code = req.query.code || null;
     const redirectUri = 'http://103.60.13.253:20306/callback/';
     const clientId = '943855772415193118';
     const clientSecret = 'GJ7NGk8AoTBZZda_dfZUH9N0Ep6ZtUjs';
-    const url = `https://discord.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`;
+    const url = `https://discord.com/api/oauth2/token`;
 
     try {
-        const response = await fetch(url, { 
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+            },
+            body: `client_id=${clientId}&client_secret=${clientSecret}&grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
         });
         if (!response.ok) {
             console.log(`Error: ${response.statusText}`);
+            return;
         }
         const json = await response.json();
         if (!json.access_token) {
             console.log('Error: Missing access_token');
+            return;
         }
         req.session['access_token'] = json.access_token;
         req.session.save();
-        res.redirect("https://vue.subsidised.repl.co/");
+        res.redirect('https://vue.subsidised.repl.co/');
     } catch (err) {
         console.error(err);
         res.status(500).send(err.message);
