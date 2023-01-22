@@ -30,7 +30,7 @@ app.get('/login', (req: Request, res: Response) => {
     const clientId = '943855772415193118';
     const scope = 'identify+email';
     const responseType = 'code';
-    const url = `https://discord.com/oauth2/authorize?client_id=${clientId}&scope=${scope}&response_type=${responseType}&redirect_uri=${redirectUri}`;
+    const url = `https://discordapp.com/oauth2/authorize?client_id=${clientId}&scope=${scope}&response_type=${responseType}&redirect_uri=${redirectUri}`;
     res.redirect(url);
 });
 
@@ -42,13 +42,18 @@ app.get('/callback', async (req: Request, res: Response) => {
     const url = `https://discord.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`;
 
     try {
-        const response = await fetch(url, { method: 'POST' });
+        const response = await fetch(url, { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        });
         if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
+            console.log(`Error: ${response.statusText}`);
         }
         const json = await response.json();
         if (!json.access_token) {
-            throw new Error('Error: Missing access_token');
+            console.log('Error: Missing access_token');
         }
         req.session['access_token'] = json.access_token;
         req.session.save();

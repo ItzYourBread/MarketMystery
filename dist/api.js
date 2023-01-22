@@ -36,7 +36,7 @@ app.get('/login', function (req, res) {
     var clientId = '943855772415193118';
     var scope = 'identify+email';
     var responseType = 'code';
-    var url = "https://discord.com/oauth2/authorize?client_id=".concat(clientId, "&scope=").concat(scope, "&response_type=").concat(responseType, "&redirect_uri=").concat(redirectUri);
+    var url = "https://discordapp.com/oauth2/authorize?client_id=".concat(clientId, "&scope=").concat(scope, "&response_type=").concat(responseType, "&redirect_uri=").concat(redirectUri);
     res.redirect(url);
 });
 app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
@@ -52,17 +52,22 @@ app.get('/callback', function (req, res) { return tslib_1.__awaiter(void 0, void
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 4, , 5]);
-                return [4, (0, node_fetch_1.default)(url, { method: 'POST' })];
+                return [4, (0, node_fetch_1.default)(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })];
             case 2:
                 response = _a.sent();
                 if (!response.ok) {
-                    throw new Error("Error: ".concat(response.statusText));
+                    console.log("Error: ".concat(response.statusText));
                 }
                 return [4, response.json()];
             case 3:
                 json = _a.sent();
                 if (!json.access_token) {
-                    throw new Error('Error: Missing access_token');
+                    console.log('Error: Missing access_token');
                 }
                 req.session['access_token'] = json.access_token;
                 req.session.save();
